@@ -1,0 +1,253 @@
+Git and github difference:
+	Git is a version control system that lets you manage and keep track of your source code history. GitHub is a cloud-based hosting service that lets you manage Git repositories
+
+Different areas:
+	Working tree
+	Staging area
+	Local repo
+	Remote repo - Can be another local repo - Origin and upstream
+	
+Different states:
+	Tracked:
+		Staged - local changes prepared and ready for commit
+		Modified - in git and modified in local
+	Untracked - new files in local, not exist in remote
+
+Git status code / short format:
+	' ' = unmodified
+	M = modified
+	A = added
+	D = deleted
+	R = renamed
+	C = copied
+	U = updated but unmerged
+
+Network command are:
+	git clone	-	full code from remote
+	git fetch / rebase	-	branch details and codes from remote
+	git pull	-	fetch and rebase of current branch code from remote
+	git push	-	push code to remote
+	
+Git File operations:
+	git add <file> -> if new, then will be added, if exist, then will be updated
+	git mv <file1> <file2> -> renaming your file
+	git mv <file1> ./newFolder/<file2> -> moving your file
+	git rm <file> -> remove file from git repo
+	
+Setting up authentications / Keys"
+	ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -> generate ssh keys to user authentication
+	cat ~/.ssh/id_rsa.pub -> ssh public key location
+	ssh-copy-id -i ~/.ssh/id_rsa.pub gituser@git.server.com -> add keys to github paypal
+
+git --version -> show git installed version
+git clone git@github.com:user/repo.git
+
+Config:
+	git config --list
+	git config --global --list
+	git config --global user.name "Manikandan P"
+	git config --global user.email "mani.alagarece@gmail.com"
+	
+Remote repos:
+	git remote -v -> list all remote details
+	git remote add origin <remote repo>	-> add origin git repo
+	git remote add upstream <upstream remote repo> -> add upstream git repo
+	git remote set-url origin git@github.com:manikandan/name.git -> update origin git repo
+
+Branch:
+	git branch -> list all available local branches
+	git branch --all / -a -> show all local and remote branches
+	git branch branch1 -> create a new branch
+	git checkout branch1 -> go to the specific branch created
+	git checkout - -> switch to previous branch
+
+Code push:
+	git diff file
+	git add file
+	git status
+	git commit -m "Short note about change"
+	git push origin master / git push --force
+	
+Get latest changes from remote repos:	
+	git fetch upstream / git fetch origin
+	git rebase upstream/develop / git rebase origin/develop
+	
+Save local changes before pull / rebase:
+	git stash -> save your local changes
+	git stash list -> list your saved changes
+	git stash drop <stash-entry> -> remove a specific entry
+	git stash clear -> remove all entry
+	git pull origin master -> Fetch and rebase remote changes to local repo
+	git stash pop -> apply latest stash-entry changes
+	git stash pop <stash-entry> -> apply specified stash-entry changes
+	
+Discard your local changes:
+	git checkout <filename> -> discard local changes for one file
+	git checkout * -> discard local changes for all files
+	
+Unstage the satged contents:
+	 git reset README.md
+	 git reset
+	
+Logs:
+	git log
+	git log --reverse -> reverse log
+	git log --oneline -> Last 7chars of commit ID and commit message
+	git log --name-only -> file names
+	git log --name-status -> File modified, deleted, etc
+	git log --skip 2 -> Skips 2 recent logs
+	git log --max-count 2 -> Print recent two logs alone
+	git log -2 -> Print recent two logs alone
+	git log --grep='and basic' -> grep commit message
+	git log --invert-grep --grep='basic' -> grep all other than matching
+	git log --author='Manikandan' -> grep author name
+	git log --no-color -> plain text
+	
+	since
+	untill
+	before
+	after
+
+difference between git rebase and git merge
+	merge - all commits will be in log and used to merge branches
+	rebase - only one commit will be in log and used to pull from remote (diamond shape problem can be avoided)
+	
+Scenarios:
+1. Create a github project and clone
+	Create github account in github.com
+	Create repository
+	Clone this repo via git bash into local system
+	
+2. Push your local changes to remote
+	git status
+	git add file1 file2
+	git commit -m "message"
+	git psuh origin master
+	
+3. Create current directory as git and add them to remote
+	git init
+	git remote add origin git@github.com:manperiyasamy/mygit.git
+	git add README.md
+	git commit -m "my first commit"
+	git push origin master
+
+4. Push local changes on top of latest changes in remote
+	git stash
+	git pull origin master
+	git stash pop
+	git add file1
+	git commit -m "message"
+	git psuh origin master
+
+5. Revert:
+	Local changes - git checkout filename
+	Staged changes:
+		git reset HEAD filename
+		git reset
+	Commited changes: (revert will create a commit in history)
+		git revert hashVal
+		git revert HEAD~3
+		git revert -n master~5..master~2
+		git revert first-bad-commit..last-bad-commit
+		
+		If you have unmerged commits:
+			git revert --continue
+			git revert --abort
+	
+6. Adding more changes to previous commit
+	git add file
+	git commit --amend
+	git commit --amend -m 'The new message'
+	
+7. Revert the changes done by reset
+	git reset --soft hashVal -> no commit history, retain all changes in working tree
+	git reset hashVal -> mixed of both soft and hard
+	git reset --hard hashVal -> no commit history, discard all local changes and no impack on the untracked files
+	
+	git fetch origin master
+	git reset --hard HEAD / ORIG_HEAD / master / origin/master
+
+8. Remove all untracked files	
+	git clean -dfni
+	-n - dry-run, d - delete directory, f - force, i - interactive
+	
+9. Find diff between files and commits
+	git diff
+	git diff file
+	git difftool file
+	git diff hashVal1 hashVal2
+	git diff branch1 branch2
+	git diff --staged -> show diff between local and stage area
+	
+10. Show, create and switch branch
+	git branch -a
+	git branch feature1
+	git checkout feature1
+	git checkout -b branch_name -> Create branch and switch to it
+	
+11. Get changes from one branch to another branch
+	git cherry-pick hashVal
+	
+12. Check what have been done in the last few days
+	git reflog
+	
+13. Undo the reset / revert changes
+	git reflog
+	git checkout hashVal
+	git branch backup -> garbage collects these changes in future (~30days)
+
+14. Add files to stage area
+	git add -A / --all -> add all files from all directory
+	git add . -> add all files only from current directory
+	git add -u -> add all except untracked files
+	git add * -> add all physical files in current dir. Similar to ls * [exclude hidden, deleted, files from other dir]
+	git add --no-all dir1/ -> add all files in dir1 except deleted files
+	git add file
+	git add -f file -> add ignored files forcefully
+	git add . --dry-run -> just check what happens next when running 'git add .'
+	git add git-*.sh -> add all sh files
+	git add -i / git add -interactive -> add files using interactive mode
+	
+15. Save local changes. It works between branches
+	git stash save "message"
+	git stash list
+	git stash pop -> take latest in stash list
+	git stash drop stash@{0}
+	git stash clear
+	
+16. Clone a repo to a specific directory
+	git clone localrepo.git path/to/place
+	git clone remoterepo.git path/to/place
+	
+17. Push code to remote branch which doesn't exist
+	git push -u origin newbranch -> u stands for --set-upstream
+	
+18. Merge two branches and delete feature branch
+	git checkout master
+	git pull origin master
+	git merge featureBranch -> git merge --abort
+	git branch --merged
+	git push origin master
+
+19. Delete local and remote branch
+	git branch -a
+	git branch -d featureBranch
+	git push origin --delete featureBranch
+
+20. Push changes from all branches
+	git push --all origin
+
+https://www.youtube.com/watch?v=HVsySz-h9r4&list=PL-osiE80TeTuRUfjRe54Eea17-YfnOOAx
+https://www.vogella.com/tutorials/Git/article.html#gitdefintion_remoterepositories
+https://dzone.com/articles/useful-git-commands
+
+	Unable to revert commited chages - both modified error
+	git restore --staged / git reset --soft
+	git restore --workingtree / git checkout file
+	git rebase --abort
+	git reset --hard fa5988b354f92c57f4ebc15ea6ebf8f30b11e824
+
+
+git checkout -b rsanthanakrishna-develop develop
+git pull git@github.paypal.com:rsanthanakrishna/batch-comp-reportmgmt.git develop
+Revert is reverting some commits in the middle with one commit history

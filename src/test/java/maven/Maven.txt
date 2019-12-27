@@ -1,0 +1,335 @@
+Maven:
+	Apache Software Foundation
+	Build automation or project management tool
+	Maven is a tool that is a part of the build phase of the DevOps lifecycle
+	Project management and comprehension tool
+	Maven provides developers a complete build lifecycle framework
+	The development team is easily able to automate the project’s build infrastructure in almost no time as Maven uses a standard directory layout and a default build lifecycle
+	
+MOJO
+	Maven plain Old Java Object. Each mojo is an executable goal in Maven, and a plugin is a distribution of one or more related mojos
+
+Benifit:
+	dependency management
+	support environment
+	build life cycle support
+	multi-module / multi project support
+
+Difference between Ant and Maven
+	Ant
+		build.xml
+		No convention, so we need to give project structure in build.xml
+		Need to provide what, when and order of things to do
+		it is tool
+		build tool
+		scripts are not reusable
+		
+	Maven
+		pom.xml
+		convention to place source and compiled code
+		it is framework
+		project management tool
+		plug-ins are reusable
+
+Convention over Configuration
+	Maven creates project structure automatically
+	So no need to specify the details in pom.xml
+	
+Aspects managed by Maven:
+	Builds
+	Documentation
+	Reporting
+	Dependencies
+	SCMs
+	Releases
+	Distribution
+	mailing list
+
+POM contains
+	project dependencies
+	plugins
+	goals
+	build profiles
+	project version
+	developers
+	mailing list
+
+Maven artifact
+	Artifact is normally a JAR - Compiled / source JAR
+	Each artifact consist - groupID, artifactID and version
+	
+Life-cycle
+	well-defined sequence / order of phases
+	If a build phase is executed, all build phases before it in sequence are executed
+
+Goal
+	goal represents a specific task / phase
+	
+Command - mvn clean dependency:copy-dependencies package?
+	clean target
+	copy dependencies
+	package the project (executing all phases up to package)
+	
+Clean phase consist of
+	pre-clean
+	clean
+	post-clean
+	
+Site phase consist of
+	pre-site
+	site
+	post-site
+	site-deploy
+
+Different types of Build Profiles?
+	per project
+	per-user
+	global
+	
+How to activate profiles?
+	command line
+	maven settings
+	environment variables
+	os settings
+	present / missing files
+	
+Maven repository
+	it is a directory where all jars, lib jars, plug-ins, etc
+	
+Types of repository
+	local - local directory - ~/m2./repository
+	central - maven community - when not found in local, then search in http://repo1.maven.org/maven2/
+	remote - Org / Dev custom repository - when not found in central repo as well
+	
+Uses of maven plugin
+	Plugin is just a execution framework
+	compile code files
+	create jar / war / tar / etc
+	unit testing of code
+	create project documentation
+	create project reports
+	
+Types of plug-ins
+	Build plugin - during build and comes under <build> element
+	Reporting plugin - during site generation and comes under <reporting> element
+
+What are build plugins
+	Antlr Plugin – Generates parsers that you can use in your code from a very concise domain-specific language.
+	QueryDSL Plugin – Interrogates your database and creates data access objects that you can use to write SQL- like queries in your Java code.
+	Test Report Plugins – Make cool report websites that show you how well your unit tests are covering your code.
+	Shade Plugin – Allow you to bundle all of your classes into an uber-Jar that is runnable. This way you can deploy just one artifact. Also, can change packages of your dependencies to work around conflicts.
+
+External Dependency
+	when dependency not found in central and remote then external dependency concept used
+	groupID
+	artifactID
+	<scope>system</scope>
+	system relative path
+	
+Archetype plugin
+	Archetype is a plugin and used to create project structure as per template
+	mvn archetype:generate
+	
+Maven SNAPSHOT
+	Durrent developement copy
+	Maven always checks for new copy / version and try to download
+	
+Transitive dependency
+	libraries that needed by your own dependency
+	
+Dependency meditation
+	it use the first declared dependency in the dependency tree with same duplicated version
+	
+Dependency scopes
+	compile -> default; available during compile time and all submodules
+	runtime -> available in runtime and test classpath
+	test -> not available for the applications; test compilation and execution phases
+	provided -> It wont download the jar. expect the JDK or a container to provide the dependency at runtime
+	system -> JAR we have to provide and will not be looked in repository
+	import > 2.0.9 -> the specified POM should be replaced with the dependencies in that POM's section
+
+Minimal set of information for dependency against dependencyManagement section?
+	groupId
+	artifactId
+	type
+	classifier
+	
+How to refer property defined in pom?
+	${pom.name}
+	${pom.version}
+	${pom.build.finalName}
+	
+Valid packaging element?
+	jar, war, ear, pom
+	default value is jar
+	
+Element for execution
+	<execution>
+
+Fully qualified artifact name
+	<groupId>:<artifactId>:<version>
+
+What if fail to define any information
+	inherit from parent pom - Basically, these are parent projects without code
+	and from base / super pom
+	
+Elements that can be modified by profiles
+	<repositories>
+	<pluginRepositories>
+	<dependencies>
+	<dependencyManagement>
+	<plugins>
+	<properties>
+	<modules>
+	<reporting>
+	<distributionManagement>
+	
+System dependency
+	This dependency not looked up in the repository
+	Will be provided by system / JDK
+	
+Optional dependency
+	transitive dependency can be marked as optional
+	
+Dependency exclusion
+	transitive dependency can be excluded by using <exclusion> element
+	
+Run clean plugin during build
+	place the clean plugin inside <execution> element
+	
+ERROR: You cannot have two plugin executions with the same or missing elements
+	Same plugin executed multiple times with same id. Make them unique id to fix
+	
+
+	
+
+
+	
+1. Transitive dependency
+2. Exclude transitive dependency
+3. Specify the range of versions
+4. Maven compiler plugin to use specific java versions
+5. POM - POM, Effective-pom / super pom, Dependency-Hierarchy
+6. Updating source and output directory
+7. Distribution management for uploading package to repository - repository and snapshotRepository
+8. Dependency management
+
+	POM - Project Object Model
+		Contains information of project and configuration
+		Effective-pom = configuration of super pom + configuration of project
+		Support single-inherited tree like java
+		Name -> Project name = groupID + artifactID
+		Version -> Project version
+		Packaging -> Packaging type for delivery - pom, jar, maven-plugin, ejb, war, ear, rar, par
+		Dependencies -> dependent projects and modules
+		Plugins -> Used to specify list of plugins
+		
+		Dependency-Hierarchy - to know how the jars are linked with another one
+		Effective-pom -> actual pom that takes into effect
+		pom -> reduced pom for easy understanding
+		
+	Build life cycle
+		Validate
+		Compile
+		Test
+		Package
+		Integration Test
+		Verify
+		Install
+		
+	Convention over configuration
+		src/main/java
+		src/test/java
+	
+	Commands:
+		mvn --version
+		export MAVEN_OPTS=-Xms256m -Xmx1024m -> setup heap memory for JVM of Maven 
+		mvnDebug clean install -> run maven in debugging mode
+		
+		Life cycle:
+			mvn clean -> remove target folder
+			mvn compile -> compile classes in src/main/java -> target/classes
+			mvn test -> compile and run unit test. clean, compile class, compile test, run test
+			mvn package -> run unit test and package it
+			mvn verify -> build package and run integration test
+			mvn install -> run integration test and install package to local repository
+				mvn -DskipITs=true install -> skip integration test
+				mvn -DskipTests=true install -> skip unit and integration test
+				mvn -Dmaven.test.skip=true install or mvn -Dmaven.test.skip=true install -> skip compile and execution of test
+				mvn clean package -Dmaven.surefire.debug -> run test in debug mode
+				mvn clean package -Dtest=MyClass -> run specific test class
+				mvn clean package -Dtest=MyClass#myTest -> run specific test class
+				
+		Check version update:
+			mvn versions:display-dependency-updates
+			mvn versions:display-plugin-updates
+			mvn versions:display-property-updates
+			
+		mvn help:effective-pom
+		mvn help:effective-settings
+		mvn dependency:tree
+		mvn dependency:analyze
+		mvn dependency:sources
+		mvn archetype:generate
+		mvn -x clean install
+		mvn test-compile -> compile classes in both src/main/java and src/test/java -> target/test-classes
+		
+	Plugins: (build will have plugins)
+		mvn-resources-plugin
+		mvn-compiler-plugin
+		mvn-jar-plugin
+		mvn-install-plugin
+		mvn-surefire-plugin
+		mvn-tomcat-plugin
+		maven-failsafe-plugin -> running integration test
+		
+		executions -> execution
+			phase
+			goal
+			
+		configuration
+			verbose
+			showWarnings
+			source
+			target
+
+	dependencyManagement:
+		to manage versions among all child projects
+		all of your child modules STOP seeing it. And thus you are forced to go into each individual module that DOES need it and declare it again (Child A and Child B, without the version though)
+	dependencies:
+		Implicilty inherited by child poms
+		A single place to manage
+		No need to redeclare anything in child poms
+		I can still redelcare and override to version 18.0 in a Child B if I want to
+		
+	Dependency:
+		Transitive dependency -> The dependency jar dependens on some other external dependencies
+		scope
+		exclusions -> exclusion
+		${project.version}
+		properties can be used as variable
+		version ranges: [ inclusive, ( exclusive
+			1.0			-	>=1.0 - can specify the higher version in dependencyManagement
+			[1.0,)		-	>=1.0
+			[1.0]		-	==1.0
+			(,1.0]		-	<=1.0
+			[1.0,2.0]	-	>=1.0 to <=2.0
+			[1.0,2.0)	-	>=1.0 to <2.0
+			(1.0,2.0]	-	>1.0 to <=2.0
+			(,1.1),(1.1,)	-	accept all version except 1.1
+			(,1.0],[1.2,)	-	accept all version except 1.1
+			
+	Modules / Layers: different layers needs different dependencies
+		web layer
+		business layer
+		data layer
+		
+		Java Project with J symbol
+		Parent POM
+		???
+		
+Clarifications:
+reporting plugins?
+repository file storage in folder structure?
+What is metedata?
+Mock test from tutorials point

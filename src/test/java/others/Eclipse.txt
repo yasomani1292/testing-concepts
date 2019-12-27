@@ -1,0 +1,37 @@
+Eclipse shortcuts:
+	F11 -> run in debug mode
+	ctrl + F11 -> run application
+	ctrl + d -> delete the selected lines
+	ctrl + e -> show list of open editors
+	ctrl + m -> maximize your current tab
+	ctrl + / -> comment / uncomment the selected lines
+	ctrl + shift + / -> block comments
+	ctrl + shift + \ -> block uncomments
+	ctrl + 1 -> show quick fix list
+	ctrl + . -> go to warning / error lines
+	F3 or ctrl + click -> open declaration
+	ctrl + alt + h -> open call hierarchy
+	
+	Alt + shift + m	-	Cut and create a new method
+	Ctrl + shift + L	-	Pref page
+	Java -> Editor -> Template
+	ctrl + shitf + f -> formating java code
+	ctrl + shift + o -> organizing imports
+	alt + shift + r -> renaming
+	alt + shift + up / down arrow -> selecting code area
+	alt + up / down arrow -> move the selected lines
+	alt + right / left arrow -> navigate forward and backward to last edited location
+	ctrl + shift + t -> search for files / classes
+	
+Debugging:
+	F11 -> run in debug mode
+	ctrl + shift + i -> Execute the selected code
+	F5 -> go into the method
+	F6 -> go to next line
+	F8 -> go to next break point else complete execution
+	
+	Right click -> source
+		getter
+		setter
+		constructor
+		tostring

@@ -1,0 +1,45 @@
+API Testing: Postman, REST-Assured, JMeter, SoapUI
+	API testing tool
+	Difference between API, REST and Web service?
+	Different request types
+		GET, POST, PUT, DELETE
+		GET:
+			Mostly used for read only / view
+			Sending parameters in URL
+			For not sensitive and confidential data
+			Small size of data as parameter
+			
+		POST:
+			
+		Difference between GET and POST:
+			GET - when not passing any sensitive / confidential data, not large parameters, 
+			GET method passes request parameter in URL String while POST method passes request parameter in request body.
+			GET request can only pass limited amount of data while POST method can pass large amount of data to server.
+			GET request can be bookmarked and cached unlike POST requests.
+			GET is mostly used for view purpose (e.g. SQL SELECT) while POST is mainly use for update purpose (e.g. SQL INSERT or UPDATE).
+			
+		DELETE: Entity to be deleted in the URI
+			it intends to delete the resource or move it to an inaccessible location
+		
+		PUT: Entity to be stored in the requested URI
+			Modified version if already exist in origin
+			If resource doesn't exist, URI will define a new resource
+			If URI doesn't understandable by resource, it will not create/ modify / implement (501) 
+
+	Different error codes - HTTP / HTTPS / REST:
+		200	- Success / ok
+		201 - Created -> New resource created
+		204 - No content -> If existing resource is modified
+		301 - Moved permanently
+		400 - Bad request -> Non-specific failure. When no other error code (4XX) is appropriate
+		401 - Unauthorized
+		403 - Forbidden
+		404 - Not Found -> When rest API can't map client URI to resource, but available in future
+		500 - Internal Server Error -> 
+		501 - Not implemented -> resource does not created / modified
+
+	Set environment and global variables
+	Run collection with data files
+	Create pm tests with different asserts
+	https://learning.getpostman.com/docs/postman/scripts/intro_to_scripts/
+	https://www.toolsqa.com/postman/oauth-2-0-authorization/
