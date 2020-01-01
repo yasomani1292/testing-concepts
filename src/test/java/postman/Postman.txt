@@ -30,3 +30,8 @@ Postman:
 	https://learning.getpostman.com/docs/postman/scripts/intro_to_scripts/
 	https://www.toolsqa.com/postman/oauth-2-0-authorization/
 	
+	Set environment and global variables
+	Run collection with data files
+	Create pm tests with different asserts
+	https://learning.getpostman.com/docs/postman/scripts/intro_to_scripts/
+	https://www.toolsqa.com/postman/oauth-2-0-authorization/

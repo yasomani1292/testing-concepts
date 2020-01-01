@@ -111,7 +111,72 @@ Logs:
 difference between git rebase and git merge
 	merge - all commits will be in log and used to merge branches
 	rebase - only one commit will be in log and used to pull from remote (diamond shape problem can be avoided)
+
+1. Git can have two repos
+	bare repos - remote / centralized repos
+	non bare repos / local repos
 	
+2. Git is case sensitive? yes
+
+3. Code pushing for review (gerrit)
+	git push origin master - regular git
+	git push origin HEAD:refs/for/master - git with gerrit pushing for review
+
+4. Creating new git repository (new directory will be created - cd mani/):
+	git init --bare mani.git
+	
+5. Cloning git repo:
+	git clone user@hostname:/p/mani.git
+
+6. Renaming file:
+	git mv mani1.txt mani2.txt
+
+7. Copy ssh public key to avoid authentication everytime:
+	ssh-copy-id -i ~/.ssh/id_rsa.pub user@hostname
+
+8. Merge a branch to master:
+	git merge dev - refer the local dev branch
+	git merge origin/dev - refer the remote dev branch
+   
+gitdir=$(git rev-parse --git-dir); scp -p -P 29418 eacffgl@gerrit.epk.ericsson.se:hooks/commit-msg ${gitdir}/hooks/
+git commit --amend
+git pull --rebase
+git rebase --continue
+
+git reset --hard 70a10b0c7338b7e102881aa630531a72a27dd391
+
+These are common Git commands used in various situations:
+start a working area (see also: git help tutorial)
+   clone      Clone a repository into a new directory
+   init       Create an empty Git repository or reinitialize an existing one
+
+work on the current change (see also: git help everyday)
+   add        Add file contents to the index
+   mv         Move or rename a file, a directory, or a symlink
+   reset      Reset current HEAD to the specified state
+   rm         Remove files from the working tree and from the index
+
+examine the history and state (see also: git help revisions)
+   bisect     Use binary search to find the commit that introduced a bug
+   grep       Print lines matching a pattern
+   log        Show commit logs
+   show       Show various types of objects
+   status     Show the working tree status
+
+grow, mark and tweak your common history
+   branch     List, create, or delete branches
+   checkout   Switch branches or restore working tree files
+   commit     Record changes to the repository
+   diff       Show changes between commits, commit and working tree, etc
+   merge      Join two or more development histories together
+   rebase     Reapply commits on top of another base tip
+   tag        Create, list, delete or verify a tag object signed with GPG
+
+collaborate (see also: git help workflows)
+   fetch      Download objects and refs from another repository
+   pull       Fetch from and integrate with another repository or a local branch
+   push       Update remote refs along with associated objects
+   
 Scenarios:
 1. Create a github project and clone
 	Create github account in github.com
@@ -251,3 +316,4 @@ https://dzone.com/articles/useful-git-commands
 git checkout -b rsanthanakrishna-develop develop
 git pull git@github.paypal.com:rsanthanakrishna/batch-comp-reportmgmt.git develop
 Revert is reverting some commits in the middle with one commit history
+

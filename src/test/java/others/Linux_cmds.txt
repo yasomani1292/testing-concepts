@@ -1,0 +1,866 @@
+Linux COmmands:
+
+grep
+	grep "linux" index.html
+	grep -i “linux” index.html
+	grep “linux” file*.*
+	grep “fast.*host” index.html
+	grep -n “word*” file.txt
+	grep –color “linux” index.html
+	grep -v linux /etc/passwd
+	grep ^root /etc/passwd
+	grep bash$ /etc/passwd
+	grep -r linux /etc/
+	grep -c 'test' /home/example/test.txt
+	grep -A2 'test' /home/example/test.txt
+	grep -B2 'test' /home/example/test.txt
+	grep -C2 'test' /home/example/test.txt
+	
+find
+	find ./foo -name foo.txt 
+	find ./foo -name foo.txt --delete
+	find ./foo -name foo.txt -exec rm -i {} \;
+	find ./foo -type d -name bar
+	find ./foo -mtime -1
+	find ./foo -mtime +1
+	find ./foo -perm 777
+	find ./foo -type f -name bar -exec chmod 777 {} \;
+	find ./ -type f -exec sed -i 's/find/replace/g' {} \;
+	find ./ -type f -name "*.md" -exec grep 'foo'  {} \;
+
+ls
+	ls -ltrah
+	ls -F
+	ls -R
+	ls --version
+	ls -ld /tmp
+	ls -n (GID UID)
+
+alias
+	alias
+	unalias ls
+
+Boolean:
+	if [ $a != $b ]
+	if [ $a -lt 100 -a $b -gt 15 ]
+	if [ $a -lt 100 -o $b -gt 100 ]
+
+Arithmatic:
+	`expr $a + $b`
+	`expr $a - $b`
+	`expr $a \* $b`
+	`expr $b / $a`
+	`expr $b % $a`
+
+Relation:
+	a = $b
+	[ $a == $b ]
+	[ $a != $b ]
+	[ $a -eq $b ]
+	[ $a -ne $b ]
+	[ $a -gt $b ]
+	[ $a -lt $b ]
+	[ $a -ge $b ]
+	[ $a -le $b ]
+
+	String Operand:
+	[ $a = $b ]
+	[ $a != $b ]
+	[ -z $a ]
+	[ -n $a ]
+	[ $a ]	-	Not empty string
+
+Files:
+Check files if read, write, execute,size > 0, and file exist respectively	
+	[ -r $file ]
+	[ -w $file ]
+	[ -x $file ]
+	[ -s $file ]
+	[ -e $file ]
+
+sed
+	sed --version
+	cat report.txt | sed 's/Nick/John/g' > report_new.txt
+	sed 's/Nick/John/g' report.txt > report_new.txt
+	sed 's/Nick|nick/John/g' report.txt
+	sed 's/^/ /' file.txt >file_new.txt
+	sed -n 12,18p file.txt
+	sed 12,18d file.txt
+	sed '1~3d' file.txt
+	sed -n '2~5p' file.txt
+	
+	sed G file.txt
+	sed 'G;G' file.txt
+	sed -f script.sed file.txt
+	sed '5!s/ham/cheese/' file.txt
+	sed '$d' file.txt
+	sed '/[0-9]\{3\}/p' file.txt
+	sed '/boom/!s/aaa/bb/' file.txt
+	sed '17,/disk/d' file.txt
+	echo ONE TWO | sed "s/one/unos/I"
+	
+	sed 's/^[ ^t]*//' file.txt
+	sed 's/[ ^t]*$//' file.txt
+	sed 's/^[ ^t]*//;s/[ ^]*$//' file.txt
+	
+	sed 's/foo/bar/' file.txt
+	sed 's/foo/bar/4' file.txt
+	sed 's/foo/bar/g' file.txt 
+	
+	sed '/baz/s/foo/bar/g' file.txt
+	
+	delete / change only the first match
+	sed '0,/RE/{//d;}' file.txt
+	sed '0,/RE/s//to_that/' file.txt
+	
+	substitute inbetween lines
+	sed '1,20 s/Johnson/White/g' file.txt
+	sed '1,20 !s/Johnson/White/g' file.txt
+	
+	sed '/pattern/d' file.txt
+	sed '/./!d' file.txt
+	sed -e '/^#/d' /etc/services
+	
+	Insert line for matching
+	sed '/regex/{x;p;x;}' file.txt
+	
+	sed '/AAA/!d; /BBB/!d; /CCC/!d' file.txt
+	sed '/AAA.*BBB.*CCC/!d' file.txt
+	
+	Print lines 65 chars long more / less
+	sed -n '/^.\{65\}/p' file.txt
+	sed -n '/^.\{65\}/!p' file.txt
+	
+cut
+	cut -b 1,2,3 state.txt
+	cut -b 1- state.txt
+	cut -b -3 state.txt
+	cut -b 1-3,5-7 state.txt
+	cut -c 2,5,7 state.txt
+	cut -c 1-7 state.txt
+	cut -c 1- state.txt
+	cut -c -5 state.txt
+
+	cut -f 1 state.txt
+	cut -d " " -f 1,2 state.txt	-	Consiquetive number will be processed as 1-2
+	cut -d " " -f 1-4 state.txt
+	cut --complement -d " " -f 1 state.txt	-	Print all except this matching pattern
+	cut --complement -c 5 state.txt
+
+	cut -d " " -f 1,2 state.txt --output-delimiter='%'	-	Replace values with delimiter value
+	cat state.txt | head -n 3 | cut -d ' ' -f 1 > list.txt
+	cat state.txt | cut -d ' ' -f 1 | sort -r
+	
+	grep bala /etc/passwd | cut -d':' -f1,6,7 --output-delimiter=$'\n'
+	cut -f 1,3 -d ':' --output-delimiter=$'\t' /etc/passwd
+	cut -d'|'  -s -f1	-	-s, --only-delimited
+		
+	
+expect
+		
+	cut -d'a|b'  -f1 file.txt
+	
+Shortcut Keys:	
+	alt+t
+	ctrl+t
+
+	ctrl+w
+	ctrl+k
+	ctrl+u
+	ctrl+y
+
+	ctrl+l
+
+	ctrl+r
+	ctrl+j
+	ctrl+s
+	ctrl+q
+
+	ctrl+a
+	ctrl+e
+
+	alt+u
+	alt+l
+	alt+c
+
+	alt+f
+	alt+b
+
+	
+FIND	-	Search the entire file system to find files and directories
+	Find Files Using Name in Current Directory
+	find . -name tecmint.txt
+
+	Find Files Under Home Directory
+	find /home -name tecmint.txt
+	
+	Find Files Using Name and Ignoring Case
+	find /home -iname tecmint.txt
+	
+	Find Directories Using Name
+	find / -type d -name Tecmint
+	
+	Find Files With 777 Permissions
+	find . -type f -perm 0777 -print
+	
+	Find Files Without 777 Permissions
+	find / -type f ! -perm 777
+	
+	Find Read Only Files
+	find / -perm /u=r
+	
+	Find Executable Files
+	find / -perm /a=x
+	
+	Find Files with 777 Permissions and Chmod to 644
+	find / -type f -perm 0777 -print -exec chmod 644 {} \;
+	
+	Find Directories with 777 Permissions and Chmod to 755
+	find / -type d -perm 777 -print -exec chmod 755 {} \;
+	
+	Find and remove single File
+	find . -type f -name "tecmint.txt" -exec rm -f {} \;
+	
+	Find all Empty Files
+	find / -type f -empty
+	
+	File all Hidden Files
+	find / -type f -name ".*"
+	
+	Find Single File Based on User
+	find / -user root -name tecmint.txt
+	
+	Find all Files Based on User
+	find /home -user tecmint
+	
+	Find all Files Based on Group
+	find /home -group developer
+	
+	Find Last 50 Days Modified Files
+	find / -mtime 50
+	
+	Find Last 50 Days Accessed Files
+	find / -atime 50
+	
+	Find Last 50-100 Days Modified Files
+	find / -mtime +50 –mtime -100
+	
+	Find Changed Files in Last 1 Hour
+	find / -cmin -60
+	
+	Find Modified Files in Last 1 Hour
+	find / -mmin -60
+	
+	Find Accessed Files in Last 1 Hour
+	find / -amin -60
+	
+	Find 50MB Files
+	find / -size 50M
+	
+	Find Size between 50MB – 100MB
+	find / -size +50M -size -100M
+	
+	Find and Delete 100MB Files
+	find / -size +100M -exec rm -rf {} \;
+	
+	Find Specific Files and Delete
+	find / -type f -name *.mp3 -size +10M -exec rm {} \;
+	
+	Find files from different directories
+	find /opt /usr /var -name foo.scala -type f
+	
+	Find files with different extentions
+	find . -type f \( -name "*.c" -o -name "*.sh" \)
+	
+	Find files that don't match a pattern (-not)
+	find . -type f -not -name "*.html"
+	
+	Find StringBuffer in all *.java files
+	find . -type f -name "*.java" -exec grep -il String {} \;
+	
+	Search for a string in gzip'd files
+	find . -type f -name "*.gz" -exec zgrep 'GET /foo' {} \; 
+	
+	Find and copy
+	find . -type f -name "*.mp3" -exec cp {} /tmp/MusicFiles \;
+	
+	Copy one file to many dirs
+	find dir1 dir2 dir3 dir4 -type d -exec cp header.shtml {} \;
+	
+	Find and tar
+	find . -type f -name "*.java" | xargs tar cvf myfile.tar
+	
+GREP	-	general regular expression parser	-	Search string or regex on one or more files
+	Search for a string in one or more files
+	grep 'fred' /etc/passwd	-	quotes not required if no regex or white space used
+	
+	Case-insensitive
+	grep -i joe users.txt                # find joe, Joe, JOe, JOE, etc.
+
+	Regular expressions
+	grep '^fred' /etc/passwd             # find 'fred', but only at the start of a line
+	grep '[FG]oo' *                      # find Foo or Goo in all files in the current dir
+	grep '[0-9][0-9][0-9]' *             # find all lines in all files in the current dir with three numbers in a row
+
+
+	Display matching filenames, not lines
+	grep -l StartInterval *.plist        # show all filenames containing the string 'StartInterval'
+
+
+	Show matching line numbers
+	grep -n we gettysburg-address.txt    # show line numbers as well as the matching lines
+
+
+	Lines before and after grep match
+	grep -B5 "the living" gettysburg-address.txt        # show all matches, and five lines before each match
+	grep -A10 "the living" gettysburg-address.txt       # show all matches, and ten lines after each match
+	grep -B5 -A5 "the living" gettysburg-address.txt    # five lines before and ten lines after
+
+	Grep other than matching
+	grep -v fred /etc/passwd             # find any line *not* containing 'fred'
+
+	Grep in a pipeline
+	ps auxwww | grep httpd               # all processes containing 'httpd'
+	ps auxwww | grep -i java             # all processes containing 'java', ignoring case
+	ls -al | grep '^d'                   # list all dirs in the current dir
+
+	Search for multiple patterns
+	egrep 'apple|banana|orange' *		# search for multiple patterns, all files in current dir
+	grep 'apple\|banana\|orange' *		# search for multiple patterns, all files in current dir
+	
+	Multiple search strings, multiple filename patterns
+	grep -li "jtable" $(find . -name "*.java,v" -exec grep -li "prevayl" {} \;)           # find all files named "*.java,v" 
+	
+	Grep + find
+	find . -type f -exec grep -l 'foo' {} \;     # print all filenames under current dir containing 'foo'
+
+
+	Recursive grep search
+	grep -rl 'null' .	# similar to the previous find command; does a recursive search
+	grep -ril 'null' /home/al/sarah /var/www      # search multiple dirs
+	egrep -ril 'aja|alvin' .                      # multiple patterns, recursive
+    
+	Grep gzip files
+	zgrep foo myfile.gz                           # all lines containing the pattern 'foo'
+	zgrep 'GET /blog' access_log.gz               # all lines containing 'GET /blog'
+	zgrep 'GET /blog' access_log.gz | more        # same thing, case-insensitive
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	SIZE:
+	> 100MB / GB
+	< 100MB / GB
+	= 100MB / GB
+	> 100MB < 200MB
+	> 100MB with its original size
+	except one / two directory
+	only in specific directory
+
+	MODIFIED TIME:
+	< 1 day / min
+	> 1 day / min
+	= 1 day / min
+	> 1 < 2 min
+	
+	PERM:
+	read only files
+	change perm for all read only files
+	files with specific permissions
+	files other than the specified permissions
+	empty files
+	delete all empty files
+	
+	OWN:
+	files with same group
+	files with same user
+	files other than the group specified
+	files other than the user specified
+	
+GREP:
+	search in one file
+	search in one / more files and directory
+	search in entire directory
+	search with regular expression
+	with and without file names
+	Print additional lines before and after
+	Print all except matching
+	Print lines when exact word matching
+	Print word alone when exact word matching
+	Print word alone when word matching with regex pattern
+	Print matching if any of the words matching
+	
+CUT:
+	get first word alone
+	get first two words alone
+	get last word alone
+	get last two words alone
+	get the next word after the match
+	get all after matching
+	get all before the matching
+	
+SED:
+	INSERT:
+	insert a line at first
+	insert a line at last
+	insert a line at Nth line
+	insert a line on a matching line
+	insert a line after a match
+	insert a line before a match
+	insert a line alternatively
+	insert a empty line on all matching
+	insert a empty line on first matching only
+	insert a empty line on second matching only
+	insert a line for all matching in all files
+	insert a line for first matching in all files
+	
+	UPDATE:
+	
+	DELETE:
+	
+	
+	
+
+
+AWK:
+	awm -F" " 
+
+ECHO:
+	print values in same line
+	print values with new lines
+	print right and left side values
+	remove previous and next char
+	
+	
+CHMOD:
+	change permissions for one / more directory
+	change permissions for all files from 333 to 444
+	change the permissions to previous state
+	change permissions as another file have
+	give permission while creating a file / directory
+	give permission for all exe files only
+	give permission for all files except exe
+	
+CHOWN:
+	change owner / user for one / more directory
+	change owner for all files from x to y
+	change owner to previous state
+	change owner as another file have
+	give owner while creating a file / directory
+	give owner for all exe files only
+	give owner for all files except exe
+	change user alone for different groups
+
+	
+Ignore proc error:
+find / -ignore_readdir_race -type f -size +1G -exec du -sh {} +
+
+List d / f with contains:
+find / \( -name "appdata" -o -name "var" \) 
+find / \( -name "appdata" -o -name "var" \) -type d
+find / \( -name "appdata" -o -name "var" \) -type f
+find / \( -name "appdata" -o -name "var" \) -prune -o -type d
+
+
+Exclude Directory:	
+find / \( -path "/appdata" \) -prune -o -type f -name "*.tar.gz"	-	one direct
+find / \( -path "/appdata" -o -path "/var" \) -prune -o -type f -name "*.tar.gz"	-	two direct
+find \( -path "/appdata" -o -path "/var" \) -prune -o -type f -name "*.tar.gz"	-	from cuur direct
+
+Include directory:
+find /appdata /var -type f -name "*.tar.gz"
+find cilPart/ data/ -name *.sh
+
+Between size range:
+find / -type f -size +100M -a -size -200M -exec du -sh {} \;
+
+List Empty files:
+find / \( -path /proc \) -prune -o -type f -empty 
+
+Modified files:
+find / -type f -cmin -10
+find / -type f -ctime +1
+
+Files with permissions:
+
+
+
+
+find / -type f ! -perm 777
+find . -type f -perm 777
+find / -perm /u=r
+find / -perm /a=x
+
+find /tmp -type f -empty
+find /home -user tecmint
+find /home -group developer
+find /home -user tecmint -iname "*.txt"
+find / -mtime 50
+find / -atime 50
+
+
+find / -cmin -60
+find / -mmin -60
+find / -amin -60
+
+
+Difference between -exec and xargs
+What is typeset and when should be used?
+How to declare arrays and read values?
+Downloading files?
+	wget -qnv
+		q	-	quite
+		nv	-	no verbose
+difference between local and global variable?
+Checking the value contains, starts-with, ends-with?
+	if [[ "$VAR" = *"contains"* ]]
+	if [[ "$VAR" = "starts-with"* ]]
+	if [[ "$VAR" = *"ends-with" ]]
+
+More than one conditions with if?
+When command / function returns 0 or 1, then it can be used directly in if block
+	if isMatch && isClean; then
+	if isMatch; then
+
+[]		-	Checking cond is true / false (0 / 1)
+[[]]	-	Checking the conditions with regex
+
+``		-	Executing command and storing results in var
+$()		-	Executing command and storing results in var
+
+$(())	-	Mathematical operation can be done
+expr $a + $b	-	Mathematical operation can be done
+
+sleep	-	s,m,h,d
+
+echo -e
+grep	-	-irveqABCc grep -q "$APP.*$VER .*True";
+grep $VMNAME $INIFILE > /dev/null 2>&1
+head -n	-	10,+10,-10
+tail -n	-	10,-10,+10
+cut 
+awk -F' ' '{print $3}'
+awk '{print $2 $3 $4}'
+
+yes | command
+$VAR and ${VAR}
+methods	-	def, function adn empty
+
+sed -i 's/^site =.*/site = '$val'/g' $INIFILE
+sed -i "/${hn}/d" /root/.ssh/known_hosts
+sed -i "s:^hypervisorname.*:resourcepool = ${rpVal}:g" $INIFILE
+sed -i 's:old:new:' file
+	i	-	Insert text
+	
+echo "1.18......0to1.19.0" | sed -r 's/[.]+/_/g'
+	g	-	all occr
+	+	-	one or more matching continuesly
+	-r	-	regex used in the script
+
+swicth case
+while and for loop
+shift
+
+n=${#repoList[*]}
+for (( i = n-1; i >= 0; i-- ))
+do
+	echo ${repoList[i]}
+	swActivate ${repoList[i]}
+done
+
+	
+ls *xlsx | grep -v Master.xlsx | xargs rm -f
+tar -xzvf ../$FILE *Questionnaire*${APP}-${VER}*xlsx  --strip-components 2
+python updateCQ.py $VMNAME $APP $cqName
+service sshd restart
+
+
+
+
+
+#!/usr/bin/expect -f
+spawn admincli
+set timeout 60
+expect "Enter User Name"
+send "msvadmin\r"
+expect "Enter Password"
+send "msvAdmin123\r"
+expect -re "admincli> "
+send "show-feature --namespace=CUS\r"
+send "show-capabilities\r"
+send "show-level\r"
+send "set-level --namespace=CUS --level=17105000\r"
+send "show-level\r"
+send "show-feature --namespace=CUS\r"
+send "set-feature --namespace=CUS --id=FeatureDvAll --state=activate\r"
+send "show-feature --namespace=CUS\r"
+send "\r"
+send "exit\r"
+expect -re "]# "
+send "cli -c 'show-service-status --node=vmx-cus-020'\r"
+send "ssh admin@vmx-cus-020\r"
+expect -re "password: "
+send "P@ssw0rd1!-0000\r"
+interact
+
+cli -c "show-service-status --node=vmx-cus-020"
+
+ssh admin@vmx-cus-020
+ssh localhost -p 13122
+list | grep -iv act
+scr:list | grep -iv act
+list | grep -iv act | wc -l
+scr:list | grep -iv act | wc -l
+
+
+
+/usr/bin/expect << EOF
+spawn ssh admin@vmx-cus-011
+expect -re "admin@vmx-*?\r"
+send "P@ssw0rd1!\r"
+EOF
+
+Find:
+Ignore proc error:
+find / -ignore_readdir_race -type f -size +1G -exec du -sh {} +
+
+List d / f with contains:
+find / \( -name "appdata" -o -name "var" \) 
+find / \( -name "appdata" -o -name "var" \) -type d
+find / \( -name "appdata" -o -name "var" \) -type f
+find / \( -name "appdata" -o -name "var" \) -prune -o -type d
+
+Exclude Directory:
+find / \( -path "/appdata" \) -prune -o -type f -name "*.tar.gz"	-	one direct
+find / \( -path "/appdata" -o -path "/var" \) -prune -o -type f -name "*.tar.gz"	-	two direct
+find \( -path "/appdata" -o -path "/var" \) -prune -o -type f -name "*.tar.gz"	-	from cuur direct
+
+Include directory:
+find /appdata /var -type f -name "*.tar.gz"
+find cilPart/ data/ -name *.sh
+
+Between size range:
+find / -type f -size +100M -a -size -200M -exec du -sh {} \;
+
+List Empty files:
+find / \( -path /proc \) -prune -o -type f -empty 
+
+Modified files: 
+>>>amin atime / cmin ctime (metadata of file changed chmod and chown) / mmin mtime (vi)
+>>>+n more than/ -n with in/ n exact
+find / -type f -cmin -10
+find / -type f -ctime +1
+
+Cut:
+echo "waitForNTFJob.sh handle_scp.exp" | cut -d" " -f2
+echo "waitForNTFJob.sh handle_scp.exp" | cut -d" " -f2 --complement
+
+Range of Chars: [-c2, -2, 2-, 2-5, -, -d only with -f]
+echo "ntf-2.23.0-SNAPSHOT-dv.tar.gz" | cut -c2-3
+echo "ntf-2.23.0-SNAPSHOT-dv.tar.gz" | cut -d"-" -f2-3
+echo "ntf-2.23.0-SNAPSHOT-dv.tar.gz" | cut -d"-" -f2-3 --complement
+
+
+chmod:
+	-R	-	recursive
+	-v	-	output the file processed
+echo:
+	*	-	print all files and folders like ls
+	-n	-	print on the same line like print in java
+	-e	-	Process backslashes \n\t
+		\\	-	backslashes
+		\b	-	backspace (remove priviouse char)
+		\e	-	escape (remove next char)
+		\n	-	new line
+		\t	-	tab space
+		\v	-	print like staircase
+		\r	-	print all values right side
+		\c	-	print all values left side till this \c and suppress new line
+		
+Files with permissions:
+Permissions:
+d-own-grp-others
+-421-421-421
+chmod 777 x.sh
+chmod -R 777 *
+
+create a file with permissions:
+touch filename.txt && chmod 755 filename.txt
+chmod 644 filename>>filename
+chmod 777 filename.txt>>!#:2
+
+
+List of options in Selenium:
+LIst of assert in explicitwait:
+how to set timeout for waitFor:
+Which wait will be alive until WD object dies:
+Xpath output:
+	//table/tr[1]/td
+CSS syntax and usage:
+deselectAll():
+fes.size():
+
+
+
+1xx Informational responses
+
+2xx Success
+This class of status codes indicates the action requested by the client was received, understood and accepted.[2]
+200 OK
+
+204 No Content
+The server successfully processed the request and is not returning any content.[14]
+
+205 Reset Content
+The server successfully processed the request, but is not returning any content. Unlike a 204 response, this response requires that the requester reset the document view.[15]
+
+206 Partial Content (RFC 7233)
+The server is delivering only part of the resource (byte serving) due to a range header sent by the client. The range header is used by HTTP clients to enable resuming of interrupted downloads, or split a download into multiple simultaneous streams.[16]
+
+207 Multi-Status (WebDAV; RFC 4918)
+The message body that follows is by default an XML message and can contain a number of separate response codes, depending on how many sub-requests were made.[17]
+
+3xx Redirection
+This class of status code indicates the client must take additional action to complete the request. Many of these status codes are used in URL redirection.[2]
+
+A user agent may carry out the additional action with no user interaction only if the method used in the second request is GET or HEAD. A user agent may automatically redirect a request. A user agent should detect and intervene to prevent cyclical redirects.[19]
+
+300 Multiple Choices
+301 Moved Permanently
+302 Found (Previously "Moved temporarily")
+305 Use Proxy (since HTTP/1.1)
+306 Switch Proxy
+
+4xx Client errors
+400 Bad Request
+401 Unauthorized (RFC 7235)
+403 (Forbidden) or 
+404 Not Found
+405 (Method Not Allowed)
+406 Not Acceptable
+407 Proxy Authentication Required (RFC 7235)
+408 Request Timeout
+409 Conflict
+411 Length Required
+414 URI Too Long (RFC 7231)
+
+500 Internal Server Error
+A generic error message, given when an unexpected condition was encountered and no more specific message is suitable.[60]
+501 Not Implemented
+The server either does not recognize the request method, or it lacks the ability to fulfil the request. Usually this implies future availability (e.g., a new feature of a web-service API).[61]
+502 Bad Gateway
+The server was acting as a gateway or proxy and received an invalid response from the upstream server.[62]
+503 Service Unavailable
+The server is currently unavailable (because it is overloaded or down for maintenance). Generally, this is a temporary state.[63]
+504 Gateway Timeout
+The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.[64]
+505 HTTP Version Not Supported
+The server does not support the HTTP protocol version used in the request.[65]
+
+
+
+List hidden files:
+find . -name ".*"		>> list all hidden files and directories
+ls -a | egrep "^\."		>> list all hidden files and directories
+ls -R					>> List all files reccursively
+
+
+
+
+
+grep / egrep or grep -E
+-i	-	case insensitive
+-v	-	invert the output
+-c	-	count of matching
+-A	-	Number of lines After match
+-B	-	Number of lines Before match
+-C	-	Number of lines Before and After match
+-o	-	only matching
+-h	-	no filename
+-w	-	only word match
+-r	-	search recursively
+-n	-	print the line numbers
+
+Fixed pattern search - grep -F
+fgrep –f file_full_of_patterns.txt file_to_search.txt
+
+Cheks:
+awk '{for(i=1;i<=NF;i++){if($i~/^th/){print $i}}}' file
+the
+the
+the
+this
+thoroughly
+
+
+egrep -wo 'th.[a-z]*' filename.txt
+
+to get filenamea
+grep pattern filename /dev/null
+grep -H pattern filename
+grep -l pattern *	-	print file names
+grep -L pattern *	-	print file names that does not match the pattern
+grep -n pattern filename 	-	print the match with line numbers
+grep '^start' filename
+grep 'end$' filename
+grep -w july filename - matches whole word
+
+
+Regex:
+*          - zero / more occurence of previous char
+.*         - zero / more occurence of any chars
+^$         - empty lines
+[]	-	char clause matching group of chars
+grep “[aA]g[ar][ar]wal” emp.lst - will match ‘Agarwal’, ‘agarwal’ and ‘agrawal’
+.	-	any single char
+?	-	any single char
++	-	one or more previous char
+-	-	zero or one previous char
+egrep	-	"mani\|melina" filename
+egrep	-	(mani|melina)p filename
+
+
+
+
+
+w -h| wc -l
+count how many logged in linux server
+-h suppress headers
+
+SORT:
+-b - inore leading white space
+-f - ignore cases [covert into uppercase]
+-g - numeric sort
+-i - ignore non-printing
+-h - human numeric sort [1M, 2G]
+-M - Month sort
+-r - reverse the result of comparision
+-V - version sort
+-C - do not report first unmatch
+-o - write output into file
+-u - unique matches
+
+
+AWK:
+-f - file
+-F - field separator
+-v - variable [used for BEGIN block]
+-n - non-decimal-data [Recognize octal and hexadecimal]
+
+
+Linux directory details
+Port forwarding
+Protocols and its details
+Services and managing them
+
+awk - print specific fields alone - 1, 1-, 2-4
+
+Grep command - https://www.sanfoundry.com/unix-questions-answers-grep-command-2/

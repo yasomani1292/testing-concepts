@@ -1,0 +1,234 @@
+Webdriver JS Locators: 9
+	id
+	name
+	linkText
+	partialLinkText
+	tagName
+	className
+	xpath
+	css
+	js
+
+Protractor Locators: 10
+	binding
+	exactBinding
+	model
+	buttonText
+	partialButtonText
+	repeater
+	exactRepeater
+	cssContainingText
+	options
+	deepCss
+
+Also, we can define our own locators too
+=====================
+creating function and calling the same in javascript
+
+==============
+Tips:
+	{{	-	by.binding
+	$(selector)		-	by.css	-	Single element
+	$$(selector)	-	by.css	-	All / Array of elements
+	TextInCurrLine\nTextInNewLine				-	text with new line can be verified
+
+
+	describe	-	suite
+	it			-	testcase
+	xit			-	exclude testcase
+	beforeAll	-	beforeClass
+	beforeEach	-	beforeTest
+
+
+
+
+map with =>	-	like for each loop
+==			-	equality with type correction
+===			-	equality without type correction
+let			-	local or immediate block or scope
+var			-	inside the same function scope (both can be global variable if declared outside of any function)
+
+
+locator()	-	to log the locator type details in console (By[css selector, cssValue])
+
+
+======================Syntax========================
+string => var val = 'chennai';
+string[] => var vals = ['che','bang','mumbai'];
+
+Loops:
+for (var val in vals)
+{
+    
+}
+
+
+
+Test	-	it
+Enabled	-	xit
+Assert	-	expect
+
+
+it('Verify login is success', function(){
+
+
+
+}
+);
+
+
+it('test case desc',function(){
+	expect('expVal').cond(actVal);
+});
+
+function - () =>
+
+https://github.com/angular/protractor/blob/master/spec/dependencyTest/seleniumWebdriver_spec.js
+
+var WEBDRIVER = {
+  staticFunctions: ['attachToSession', 'createSession'],
+
+  instanceFunctions: ['actions', 'wait', 'sleep', 'getCurrentUrl', 'getTitle',
+    'takeScreenshot', 'getSession', 'getCapabilities', 'quit', 'touchActions',
+    'executeAsyncScript', 'call', 'wait', 'getWindowHandle',
+    'getAllWindowHandles', 'getPageSource', 'close', 'get', 'findElement',
+    'findElements', 'manage', 'navigate', 'switchTo']
+};
+
+var WEBELEMENT = {
+  instanceFunctions: ['getDriver', 'getId', 'findElement', 'click', 'sendKeys', 'getTagName',
+    'getCssValue', 'getAttribute', 'getText', 'getSize', 'getLocation', 'isEnabled', 'isSelected',
+    'submit', 'clear', 'isDisplayed', 'takeScreenshot']
+};
+var BY = {
+  staticFunctions: ['className', 'css', 'id', 'linkText', 'js', 'name',
+      'partialLinkText', 'tagName', 'xpath']
+};
+
+var TESTING = {
+  instanceFunctions: ['after', 'afterEach', 'before', 'beforeEach', 'it', 'xit']
+};
+
+
+
+var SeleniumError = require('selenium-webdriver').error;
+
+expect(typeof SeleniumError.NoSuchElementError == 'function').toBe(true);
+expect(typeof SeleniumError.ErrorCode == 'object').toBe(true);
+expect(typeof SeleniumError.ErrorCode.NO_SUCH_ALERT == 'number').toBe(true);
+
+browser.get('url');
+
+var greeting = element(by.binding('yourName'));
+
+element(by.model('yourName')).sendKeys('Julie');
+
+expect(greeting.getText()).toEqual('Hello Julie!');
+
+await browser.get('http://www.angularjs.org');
+
+npm install -g protractor
+webdriver-manager update
+webdriver-manager start
+
+todo-spec.js............
+
+describe('angularjs homepage todo list', function() {
+  it('should add a todo', function() {
+    browser.get('https://angularjs.org');
+
+    element(by.model('todoList.todoText')).sendKeys('write first protractor test');
+    element(by.css('[value="add"]')).click();
+
+    var todoList = element.all(by.repeater('todo in todoList.todos'));
+    expect(todoList.count()).toEqual(3);
+    expect(todoList.get(2).getText()).toEqual('write first protractor test');
+
+    // You wrote your first test, cross it off the list
+    todoList.get(2).element(by.css('input')).click();
+    var completedAmount = element.all(by.css('.done-true'));
+    expect(completedAmount.count()).toEqual(2);
+  });
+});
+
+conf.js..........
+exports.config = {
+  seleniumAddress: 'http://localhost:4444/wd/hub',
+  specs: ['todo-spec.js']
+};
+
+
+protractor conf.js
+
+node --version
+
+java -version
+
+exports.config = {
+  framework: 'jasmine',
+  seleniumAddress: 'http://localhost:4444/wd/hub',
+  specs: ['spec.js'],
+  capabilities: {
+    browserName: 'firefox'
+  }
+}
+
+
+exports.config = {
+  framework: 'jasmine',
+  seleniumAddress: 'http://localhost:4444/wd/hub',
+  specs: ['spec.js'],
+  multiCapabilities: [{
+    browserName: 'firefox'
+  }, {
+    browserName: 'chrome'
+  }]
+}
+
+function add(a, b) {
+    firstNumber.sendKeys(a);
+    secondNumber.sendKeys(b);
+    goButton.click();
+  }
+  
+add(1, 2);
+
+
+
+
+
+=======================QA==========================
+1. Diff between toBe and toEquals?
+2. Num of elements and taking single element from the group?
+	element.all(loc).count() - total elements
+	element.all(loc).get(index) - single elements
+3. Diff between == and ===?
+
+==========================================================================
+Typescript:
+==========================================================================
+return type and access specifiers
+static 
+create and call methods from same and different classes
+Arrays and loops
+
+
+num * num	-	Getting NaN when num is undefined
+num			-	undefined when no values assigned
+
+
+Variables:
+	var variable_name:dataType = value;
+	
+	Global
+	Class / fields - call using obj or class name
+	local
+	
+	typecasting - <string> <any>
+	
+Operators:
+	-	negation
+	cond ? ex1 : ex2 - conditional operators
+	typeof - show dataType
+	instanceof - instance type
+

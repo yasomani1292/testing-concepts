@@ -1,45 +1,189 @@
-API Testing: Postman, REST-Assured, JMeter, SoapUI
-	API testing tool
-	Difference between API, REST and Web service?
-	Different request types
-		GET, POST, PUT, DELETE
-		GET:
-			Mostly used for read only / view
-			Sending parameters in URL
-			For not sensitive and confidential data
-			Small size of data as parameter
+REST
+	Roy Fielding in 2000
+	Architecture / pattern
+	Stands for Representational state transfer
+	Is a web service
+	Client dosen't want to know anything about application in server
+	REST doesn't allow server to store any information that sent by client
+	Client and Server communicate each other via HTTP using
+		URI
+		CRUD
+		JSON
+
+Webservice
+	Services that implements REST
+	Collection of open protocols and standards used for exchanging data between applications or systems or client and server
+
+REST Evolution:
+	RPC
+		Remote Procedure Call
+		Oldest or simplest type of API
+		Tightly coupled
+		XML-RPC
+			Data format will be in XML
+		JSON-RPC
+	SOAP
+		Simple Object Access Protocol
+		Official protocol defined by W3C
+		W3C - world wide web consortium
+		Secured, light weight and fast
+	RESTful
+	
+Types of Web services
+	SOAP
+		SOAP is an XML-based protocol for accessing web services over HTTP
+		Envelope is an root element
+		Two parts
+			headers
+			body
 			
-		POST:
-			
-		Difference between GET and POST:
-			GET - when not passing any sensitive / confidential data, not large parameters, 
-			GET method passes request parameter in URL String while POST method passes request parameter in request body.
-			GET request can only pass limited amount of data while POST method can pass large amount of data to server.
-			GET request can be bookmarked and cached unlike POST requests.
-			GET is mostly used for view purpose (e.g. SQL SELECT) while POST is mainly use for update purpose (e.g. SQL INSERT or UPDATE).
-			
-		DELETE: Entity to be deleted in the URI
-			it intends to delete the resource or move it to an inaccessible location
+	RESTful (JAX-RS JAVA API for RESTful ws / javax.ws.rs package)
+		REST Architecture based Web Services
+		Heterogeneous launguages and environments
+		Communicate between applications that are built in different language / environments
+		Everything is a resource and each of them identified by URI / Global IDs
+		Light weight, highly scalable and maintainable
+		Very commonly used to create APIs for web-based applications
+	XML-RPC - tightly coupled and old implementation
+	JSON-RPC
+	
+Resources Types:
+	Request
+		JSON
+		XML
+		HTML
+		TEXT
+		JavaScript
+	Response
+		JSON
+		XML
+		HTML
+		TEXT
+		Auto
 		
-		PUT: Entity to be stored in the requested URI
-			Modified version if already exist in origin
-			If resource doesn't exist, URI will define a new resource
-			If URI doesn't understandable by resource, it will not create/ modify / implement (501) 
+Elements or component
+	Resources - API class and methods
+		@Path("")
+	Request Verb - Request method / type
+		GET - read
+		POST - creat
+		PUT - update
+		DELETE - delete resource / move to inaccessible location
+		OPTIONS - get the supported operations on a resource
+	Request Headers
+		Additional information sent with request
+		Type of response required
+		Authorization details
+	Request Body
+		Additional data sent for POST type
+		This will add a resource to the server
+	Response Body
+		Main body of response
+	Response status code
+	
+Project / API implementation:
+	Generally 3 classes will be for one service
+		User.java - POJO class where it represents a table / json / xml and map fields
+		UserDao.java - Data Access Object - methods to perform CRUD operations
+		UserServices.java	-	This is service class where requests will be directly handled
+			@GET
+			@Path("/users")
+			@Produces(MediaType.APPLICATION_XML)
+			@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+			@FormParam("name") String name
+			@PathParam
+			@QueryParam
+			@HeaderParam
+			@MatrixParam
+			
+Types of API Authentication
+	No Auth
+	Bearer Token
+	Basic auth
+	Digest Auth
+	OAuth 1.0
+	OAuth 2.0
+	NTLM Authentication
+	Hawk Authentication
+	AWS Signature
+	
+Response codes
+	There are five values for the first digit:
+		1xx (Informational): The request is received and continues to be processed
+		2xx (Successful): The request is successfully received, understood, and accepted
+		3xx (Redirection): Further action needs to be taken to complete the request
+		4xx (Client Error): The request contains the wrong syntax or cannot be fulfilled
+		5xx (Server Error): The server fails to fulfill an apparently valid request
+	
+	200	- Success / ok
+	201 - Created -> New resource created
+	204 - No content - when response is empty / method is not defined
+	
+	301 - Moved permanently
+	
+	400 - Bad request -> Non-specific failure. When no other error code (4XX) is appropriate / Malformed parameter
+	401 - Unauthorized - No permission to do specific operation
+	403 - Forbidden / when accept header not specified
+	404 - Not Found -> When rest API can't map client URI to resource, but available in future
+	
+	500 - Internal Server Error
+	501 - Not implemented - If URI not understandable by resource
 
-	Different error codes - HTTP / HTTPS / REST:
-		200	- Success / ok
-		201 - Created -> New resource created
-		204 - No content -> If existing resource is modified
-		301 - Moved permanently
-		400 - Bad request -> Non-specific failure. When no other error code (4XX) is appropriate
-		401 - Unauthorized
-		403 - Forbidden
-		404 - Not Found -> When rest API can't map client URI to resource, but available in future
-		500 - Internal Server Error -> 
-		501 - Not implemented -> resource does not created / modified
+Caching
+	max-age - set expiry time
+	must-revalidate - validation should be enabled after expiry
+	cache-control - control of cache
 
-	Set environment and global variables
-	Run collection with data files
-	Create pm tests with different asserts
-	https://learning.getpostman.com/docs/postman/scripts/intro_to_scripts/
-	https://www.toolsqa.com/postman/oauth-2-0-authorization/
+Negative Scenarios
+	With different protocol - http, https
+	Without accept header
+	Invalid header
+	Invalid token
+	Different level of authentication
+	
+Automation tools
+	Katalon Studio (support data-driven)
+		Open source
+		Web and Desktop Application
+		Mobile app
+		API - SOAP and REST request
+		Reports - Monitoring, Analytics, Insights
+		Integration - Jira, CI/CD, DevOps
+	Postman
+		Chrome plugin
+		Support Rest
+		Support integration test - Swagger and RAML format
+		Has Run, Test, Documentation and Monitoring features
+		Support GraphQL request, schemas, variables and query
+	SoapUI
+		Support Rest and Soap request
+		Load test and security scans can be done
+		Data-driven - from files, database, excel
+		Support CI/CD
+	Rest-Assured
+		Open source
+		Support Rest
+		Integrated with serenity
+		So support UI + Rest
+		Support BDD - given, when, then
+	JMeter
+		Open source
+		Support load and API testing
+		Support CI/CD
+	APIGee
+		Cross-cloud API testing tool
+		Powered by Javascript
+	
+Difference between GET and POST:
+	GET - when not passing any sensitive / confidential data, not large parameters, 
+	GET method passes request parameter in URL String while POST method passes request parameter in request body.
+	GET request can only pass limited amount of data while POST method can pass large amount of data to server.
+	GET request can be bookmarked and cached unlike POST requests.
+	GET is mostly used for view purpose (e.g. SQL SELECT) while POST is mainly use for update purpose (e.g. SQL INSERT or UPDATE).
+
+Service Provider or Publisher
+	Who is providing API classes and service
+Service Requestor or Consumer
+	who is using this service
+	
+Difference bw SOAP and RESTFul

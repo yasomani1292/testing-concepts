@@ -1,0 +1,42 @@
+Security testing:
+Java
+	Spotbug
+	findsetbug
+	
+sonarlint
+sonarqube
+tslint
+
+MySQL:
+	Functions
+	Data manupulation
+	
+Constructive way thinking and speaking
+Maven configuration with Jenkin
+Source and binary difference
+
+Manual:
+	Stub and driver
+	DRE - Formulas
+	Open stack
+	dockers
+
+Jasmine - https://jasmine.github.io/2.0/introduction.html
+Protractor - https://www.protractortest.org/#/tutorial
+Protractor Syl - http://testleaf.com/course/protractor/
+
+Linux - https://www.tldp.org/LDP/Bash-Beginners-Guide/html/sect_01_02.html
+	
+	
+DSL - Domain specific language
+
+OpenGrok - OpenGrok is a source code search and cross reference engine. It helps programmers to search, cross-reference and navigate source code trees
+
+Gerrit - Gerrit is a free, web-based team code collaboration tool. Software developers in a team can review each other's modifications on their source code using a Web browser and approve or reject those changes. It integrates closely with Git, a distributed version control system
+
+
+What is gradle (like Maven)?
+Great engineering practices with a focus on TDD and BDD principles?
+How we can strongly focus on non-functional requirements at the beginning rather than an afterthought?
+Working with XML and JSON?
+Strong experience working in a Continuous Testing / DevOps environment?
