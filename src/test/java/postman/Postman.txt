@@ -1,37 +1,37 @@
-Postman:
+What is postman?
 	API testing tool
-	Different request types
-		GET, POST, PUT, DELETE
-		Difference between GET and POST:
-			GET - when not passing any sensitive / confidential data, not large parameters, 
-			GET method passes request parameter in URL String while POST method passes request parameter in request body.
-			GET request can only pass limited amount of data while POST method can pass large amount of data to server.
-			GET request can be bookmarked and cached unlike POST requests.
-			GET is mostly used for view purpose (e.g. SQL SELECT) while POST is mainly use for update purpose (e.g. SQL INSERT or UPDATE).
-			
-		DELETE: Entity to be deleted in the URI
-			it intends to delete the resource or move it to an inaccessible location
-		
-		PUT: Entity to be stored in the requested URI
-			Modified version if already exist in origin
-			If resource doesn't exist, URI will define a new resource
-			If URI doesn't understandable by resource, it will not create/ modify / implement (501) 
+Advantage?
+	Supports REST api testing
+	GraphQL
+	Mock servers
+	Collection runner for running test repeatedly
+	Support CI/CD by newman feature
+Variables?
+	Environment variable - for all collection with {{}}
+	Global / Collection variable - for all request with {{}}
+	Path variable - specific request :pathVarName
+	Query parameter - specific request with key and value
+GraphQL?
+	Query language for API
+	It is specification for fetching specific / limited values in respone
+	Create personnel access token / bearer token
+		Gitub -> Settings -> Developer Settings -> Generate PAT
+	Add it to postman request
+		Header -> Authorization - Bearer dS76SDASF87AS5FASA785ASA
+	Create new API and import github public schema
+		https://developer.github.com/v4/public_schema/
+	Add this schema in request
+Collections?
+	Set of requests
+Share and Import collections
+	Can be shared as file or link
+Integration with CI
+	Can be integrated by newman feature
+Mock server configuration and use
+Write postman tests and understand reports
+Run test repeatedly with different data
+Postman tests
 
-	Different error codes
-		200	- Success / ok
-		201 - New resource created
-		204 - No content -> If existing resource is modified
-		501 - Not implemented (resource does not created / modified)
-		301 - Moved permanently
-		400, 404
-	Set environment and global variables
-	Run collection with data files
-	Create pm tests with different asserts
-	https://learning.getpostman.com/docs/postman/scripts/intro_to_scripts/
-	https://www.toolsqa.com/postman/oauth-2-0-authorization/
-	
-	Set environment and global variables
-	Run collection with data files
-	Create pm tests with different asserts
-	https://learning.getpostman.com/docs/postman/scripts/intro_to_scripts/
-	https://www.toolsqa.com/postman/oauth-2-0-authorization/
+Reference:
+https://github.com/vdespa/postman-quick-reference-guide
+https://learning.getpostman.com/docs/postman/scripts/intro_to_scripts/
