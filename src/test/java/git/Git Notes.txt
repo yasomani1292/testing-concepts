@@ -91,6 +91,7 @@ Unstage the satged contents:
 	
 Logs:
 	git log
+	git log --all -> show all commits regardless of branch
 	git log --reverse -> reverse log
 	git log --oneline -> Last 7chars of commit ID and commit message
 	git log --name-only -> file names
@@ -99,15 +100,23 @@ Logs:
 	git log --max-count 2 -> Print recent two logs alone
 	git log -2 -> Print recent two logs alone
 	git log --grep='and basic' -> grep commit message
+	git log -- file1.java file2.java -> grep by file
+	git log -S"string from file" -> grep by file content
 	git log --invert-grep --grep='basic' -> grep all other than matching
 	git log --author='Manikandan' -> grep author name
+	git log --author='Manikandan\|Yaso' -> grep more author name
+	git log --committer='Manikandan' -> grep commiter name
 	git log --no-color -> plain text
+	git log --no-merges -> merge logs will not be shown
+	git log --after 2.days.ago -> last two days logs
+	git log --after "yesterday"
+	git log --after "1 week ago"
+	git log --after "2020-01-10" --before "202-01-13" -> date range
+	git log master..feature -> since..until -> commit range
+	git log -p -> diff / changes for each commits
+	git log --stat -> Summary of commits, no of lines added removed etc
+	git log --pretty=format:"Commit: %H Author: %aN Date: %aD" -> small case can be used to give shorter info
 	
-	since
-	untill
-	before
-	after
-
 difference between git rebase and git merge
 	merge - all commits will be in log and used to merge branches
 	rebase - only one commit will be in log and used to pull from remote (diamond shape problem can be avoided)
