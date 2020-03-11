@@ -60,6 +60,9 @@ Branch:
 	git branch branch1 -> create a new branch
 	git checkout branch1 -> go to the specific branch created
 	git checkout - -> switch to previous branch
+	git branch -d branchName -> delete merged local branch
+	git branch -D branchName -> delete unmerged local branch
+	git push origin -d branchName -> delete remote branch
 
 Code push:
 	git diff file
