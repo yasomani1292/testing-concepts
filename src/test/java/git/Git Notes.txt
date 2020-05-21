@@ -313,6 +313,13 @@ Scenarios:
 
 20. Push changes from all branches
 	git push --all origin
+	
+21. Resetting all commits including first commit
+	git checkout --orphan=temp_branch --> like 'git init'
+	git commit -m "Adding all tenants and supporting lnp"
+	git branch -D master --> delete master
+	git branch -m master --> rename / move current branch to master
+	git push -f origin master
 
 https://www.youtube.com/watch?v=HVsySz-h9r4&list=PL-osiE80TeTuRUfjRe54Eea17-YfnOOAx
 https://www.vogella.com/tutorials/Git/article.html#gitdefintion_remoterepositories
