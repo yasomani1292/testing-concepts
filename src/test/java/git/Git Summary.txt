@@ -1,0 +1,66 @@
+	Centralized version controling tool
+	git clone gitrepo.git
+	git fetch / rebase
+	git pull origin develop
+	
+	git status
+	git diff file
+	git diff commitID1 commitID2
+	git diff --satged
+	
+	git remote -v
+	git remote add url
+	git remote set-url url
+	
+	git log
+	git log --reverse
+	git log --oneline
+	git log --name-only
+	git log --name-status
+	git log -2
+	git log --skip 2
+	git log --author=""
+	git log --committer=""
+	git log --stat
+	git log -p -- fileName
+	
+	git stash
+	git stash pop
+	git stash list
+	git stash drop ID
+	git stash clear
+	
+	git branch -all
+	git branch newBranch
+	git checkout newBranch
+	git checkout -b newBranch
+	git checkout --orphan=newBranch
+	git merge otherBranchName
+	git branch -d newBranch
+	git branch -D newBranch
+	git branch -m rename
+	
+	git rm file
+	git mv oldname newname
+	git add file
+	git add -A
+	git add .
+	git add -u
+	
+	git commit -m "short msg about commit"
+	git commit --amend
+	
+	git push origin branchName
+	git push -u origin branchName
+	git push -f origin branchName
+	git push -d origin branchName
+	
+	git revert hashVal
+	git revert HEAD~3
+	git revert commit1..commitN
+	
+	git reset commitID
+	git reset --soft commitID
+	git reset --hard commitID
+	
+	git clean -dfin
