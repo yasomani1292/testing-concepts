@@ -1,5 +1,8 @@
 What is postman?
 	API testing tool
+	Postman is a rest client/ user agent/ interface.
+	Used to perform API testing with more flexibility
+	
 Advantage?
 	Supports REST api testing
 	GraphQL
@@ -21,17 +24,181 @@ GraphQL?
 	Create new API and import github public schema
 		https://developer.github.com/v4/public_schema/
 	Add this schema in request
-Collections?
-	Set of requests
-Share and Import collections
-	Can be shared as file or link
-Integration with CI
-	Can be integrated by newman feature
-Mock server configuration and use
-Write postman tests and understand reports
-Run test repeatedly with different data
-Postman tests
 
-Reference:
-https://github.com/vdespa/postman-quick-reference-guide
-https://learning.getpostman.com/docs/postman/scripts/intro_to_scripts/
+Postman Modules:
+Http methods - CRUD operations
+URL:
+	URL is a complete request which contains all inputs required
+	URI / End points / resources
+	protocol
+	hostname
+	port
+	path / resource details
+	path variable / param
+	matrix param
+	query param
+
+Params
+	query param
+	path variables
+	
+Authorization (11):
+	1. Inerit auth from parent - refer collection / parent folder
+	2. No Auth - no authentication is required
+	3. API Key - key-value pair and can be added as header / query param
+	4. Bearer Token / JSON Web Token / JWT  - token as header (Bearer <Your API key>)
+	5. Basic auth - username and password (Basic <Base64 encoded username and password>)
+	6. Digest auth - two times request will be sent
+		un and pwd
+		un+ pwd + Number + Realm val + 401 + [un + pwd]
+	7. Oauth 1.0
+		Access data from thrid party API without exposing user credentials
+		Referred as two-legged / three-legged auth
+		Request for access token -> Return initial / temp token -> user sends auth with temp token -> SP returns access token
+		Can be passed as header / url / body
+		Need to pass 4 input from user
+	8. Oauth 2.0
+		Access token alone enough
+		You can generate token from postman as well by giving client / secret ID, callback url, auth url and token url
+	9. Hawk authentication
+		partial cryptographic verification
+		ID, Key and algorithm
+	10. AWS signature
+		used for aws
+		custom HTTP scheme
+		keyed-HMAC - Hash Message Authentication Code
+	11. NTLM auth
+		Username and password to be given. Domain and hostname will be taken from current PC
+		Windows operating system
+		standalone systems
+	
+Headers
+	User agent
+	
+	Cookies
+		Add, Edit, Delete, Create as jar
+		Cookie as JAR
+			const cookieJar = pm.cookies.jar(); // create jar
+			cookieJar.set(URL, cookie name, cookie value, callback(error, cookie)); // create cookie
+			cookieJar.get(URL, cookie name, callback(error, cookie)); // get the created cookie
+			cookieJar.getAll(URL, callback(error, cookies)); // get the created cookies
+			cookieJar.unset(URL , cookie name, callback (error)); // Delete the created cookie
+			cookieJar.clear(URL, callback (error)); // delete the set cookies
+	
+	Content-type
+		ANY - */*
+		BINARY - application/octet-stream
+		HTML - text/html
+		JSON - application/json application/javascript text/javascript
+		TEXT - text/plain
+		URLENC - application/x-www-form-urlencoded
+		XML - application/xml text/xml application/xhtml+xml
+	
+	Body
+		none - no content / body
+		form-data - html file - CT is multipart/form-data; boundary={boundary string}
+		x-www.form.urlencoded - application/x-www-form-urlencoded
+		raw
+			JSON, XML, HTML, TEXT and JavaScript
+			application/json, application/xml, application/html, application/text, application/javascript
+		binary - binary files only
+		GraphQL - application/json
+		
+	Content-length
+	
+Pre-request script
+	It is also javascript which executes and send request if no errors
+	
+Tests
+	Verify reponses
+	pm.test - test cases
+	pm.response - response object
+	pm.expect - chai assertions
+	
+	Test:
+		1. test description
+		2. function(){};
+	
+	Response:
+		pm.response.to.have.status(200);
+		pm.response.to.not.be.error;
+		pm.response.to.have.jsonBody("");
+		pm.response.to.have.body("body string to search");
+		pm.response.to.not.have.jsonBody("error");
+		pm.response.to.have.header("headerName");
+		pm.response.text();
+		pm.response.json();
+		pm.response.responseTime;
+		pm.response.code;
+		
+		pm.response.to.be.ok;
+		pm.response.to.be.withBody;
+		pm.response.to.be.json;
+
+	Expect:
+		pm.expect("").to.include("search string");
+		pm.expect([1,2,3]).to.include(2);
+		pm.expect({a:1,b:2,c:3}).to.include([a:1,c:3]);
+		pm.expect([1,2,3]).to.be.an('array').that.includes(2);
+		pm.expect("").to.eql(100);
+		pm.expect(int).to.equal(10);
+		pm.expect("mani").to.be.a('string');
+		pm.expect({a:1}).to.be.an('object');
+		pm.expect(undefined).to.be.an('undefined');
+		pm.expect("").to.be.below(200);
+		pm.expect("").to.be.oneOf([201,202]);
+		pm.expect("").to.be.true;
+		pm.expect("").to.be.false;
+		pm.expect([]).to.be.empty;
+		pm.expect('').to.be.empty;
+		pm.expect([]).to.be.an('array').that.is.empty;
+		pm.expect("").to.have.string("partial str");
+		pm.expect({a:1, b:2}).to.have.all.keys('a','b');
+		pm.expect({a:1, b:2}).to.have.any.keys('a','b');
+		pm.expect({a:1, b:2}).to.not.have.any.keys('c','d');
+		pm.expect({a:1,b:2}).to.have.property('a');
+		pm.expect({a:1,b:2}).to.be.an('object').that.has.all.keys('a','b');
+		pm.expect('mani').to.have.lengthOf(3);
+		pm.expect([1,2,3]).to.have.lengthOf(3);
+		pm.expect([1,2,3]).to.have.numbers([2,1,3]);
+		
+		//validate response structure - tiny validator
+		var schema = {type: int, type: boolean};
+		var data = {10, true};
+		pm.expect(tv4.validate(data, schema)).to.be true;
+		
+		//xml to json
+		var jsonObject = xml2Json(responseBody);
+		
+		//send asynchronous request
+		pm.sendRequest("req url", function(err, response){
+		console.log(response.json());
+		});
+		
+Variables:
+	Gloabal variables:
+		pm.globals.set("variable","value");
+		pm.globals.get("variable");
+		pm.globals.unset("variable");
+		
+	Collection Variables:
+		pm.collectionVariables.set(variable:string, value:string);
+		pm.collectionVariables.get(variable:string);
+		pm.collectionVariables.unset(variable:string);
+
+	Environment Variables:
+		Create:
+			pm.environment.set("variable","value");
+			var obj = {a: 'val1', b: 'val2'}
+			pm.environment.set("obj", JSON.stringify(obj));
+
+		Read:	
+			var value = pm.environment.get('variable');
+			var obj = JSON.parse(pm.environment.get("obj"));
+
+		Reset:
+			pm.environment.unset("variable");
+		
+	Global and Env variables:
+		pm.variables.get("variable");
+
