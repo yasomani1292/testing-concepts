@@ -1,0 +1,137 @@
+JMeter:
+	Load Testing - system behaviour under specific load
+	Stree testing / robustness - knowing the upper limit of the system
+	Bottle neck
+	Endurance / soak / stability testing
+	Volume testing - transaction size being processed or transffered
+	Spike testing - system behaviour with sudden heavy loads
+	
+	Other perf tools:
+		JMeter
+		Load runner
+		Flood
+		Watch house
+	
+	Goals:
+		Councurrency / throughput - txns per second the application can handle
+		Server response time - time taken to process a single request
+		To identify the bottle-neck of the system
+	
+	Why JMeter highlights:
+		JMeter user to perform perfomance testing
+		Apache Jmeter is free and open source
+		Initially designed for web application load testing, later suports FTP, etc
+	
+	Support different server types:
+		Web - http, https
+		Webservice - SOAP, REST
+		Database - JDBC
+		LDAP
+		JMS
+		MAIL - SMTP
+	
+	Elements:
+		Test plan - series of steps. Can contain more elements in each category
+		Thread group
+			start of test plan
+			Controllers + Samplers
+			Controllers
+				Samplers
+				Logic controller
+			setup number of threads
+			setup ramp up period
+			number of times executes
+			
+			
+		Sampler - it is a request and follows same order in the tree
+		Assertion
+			asserting responses
+		Listener
+			provides information about test and results
+		Logic controller - using this you can logically control requests/visualizer/
+		Timer
+			delay before sending each request
+		Config Element
+			Add or modify element properties
+		Pre-processor - execute some actions prior to request
+		Post-processor - execute some actions post to request
+	
+	Execution order:
+		config element
+		pre-processor
+		timer
+		sampler
+		post-processor
+		assertions
+		listener
+	
+	Jmeter plugins:
+		stepping thread group
+		perfMon metrics collector
+		response times vs threads
+		response times distribution
+		parameterized controller
+		
+	Reports supported:
+		Summary
+		Graph
+		Aggregate report
+		Aggregate graph
+		Tree
+		Table
+		
+	Command line options:
+		-h, --help
+		-v, --version
+		-t, --testfile <argument>
+		-l, --logfile <argument>
+		-n, --nongui
+		-H, --proxyHost <argument>
+		-P, --proxyPort <argument>
+		-u, --username <argument>
+		-a, --password <argument>
+		-L, --loglevel <argument>=<value>
+		-o, --reportoutputfolder <argument>
+	
+	JMX files:
+		JMeter scripts are jmx files in format of XML
+		Each element contains jmeter class name which implements JMeter components and set of properties
+			stringProp
+			intProp
+			boolProp
+			elementProp
+			collectionProp
+		HTTPSamplerProxy:
+			HTTPSampler.method
+			HTTPSampler.domain
+			HTTPSampler.protocol
+			HTTPSampler.port
+			HTTPSampler.path
+			HTTPSampler.contentEncoding
+			HTTPSampler.follow_redirects
+			
+	Running scripts:
+		jmeter -t /pathToScript/nameOfYourScript.jmx -n -l /pathToScript/report.jtljmeter -g /pathToScript/report.jtl -o  /pathToScript/report
+			
+	Sample templates:
+		./bin/templates/samle.jmx files
+	
+	Use cases:	
+	Recording scripts:
+		Setup proxy in both browser and JM GUI
+		Add domain and port details
+		Add include and exclude url patterns
+		Start and stop as required
+	Paramerization:
+		Create a csv with data and save in same folder in test present
+		Add file and specify credentials as USER,PASS
+		Refer same name in request as $(USER) ${PASS}
+	Correlation:
+		To pass dynamic data during runtime
+		Can be extracted by using regex
+	JMeter distributed system:
+		Running test from different client systems to stress the server
+		Master, Slave and Target
+		Add all remote IPs in JMeter.properties
+		Run from command prompt - /JMETER_HOME/bin/jmeter-server
+		Open UI and run any test as -> remote start -> remote IP address
