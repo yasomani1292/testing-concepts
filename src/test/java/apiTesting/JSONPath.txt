@@ -1,0 +1,65 @@
+JSONPath: https://jsonpath.com/
+JSON Operators:
+	$	-	root element
+	@	-	current element
+	[ ]	-	subscript operator
+	*	-	wildcard that returns all
+	,	-	union operator
+	:	-	array slice operator
+	()	-	script expression
+	?()	-	filter expression that matches certain criteria
+	.	-	child element
+	..	-	child and grand-child / descendent
+	[start:end]	-	range of items
+	[start:]	-	all items from start index
+	[:end]		-	all items from 1st to end index
+	[-end:]		-	items from last
+
+Filter Operators:
+	==
+	=~
+	in
+	<
+	>
+	<=
+	>=
+	in	-	left exists in right [?(@.size in ['S', 'M'])]
+	nin	-	left does not exists in right
+	subsetof	-	left is a subset of right [?(@.sizes subsetof ['S', 'M', 'L'])]
+	size	-	size of left (array or string) should match right
+	empty	-	left (array or string) should be empty
+
+Functions:
+	min()	-	
+	max()	-	
+	avg()	-	
+	stddev()	-	
+	length()	-	
+
+	parent element
+	not
+
+	
+	[*]	-	all items in the array
+	[0]	-	first item only
+	[-1:] or [(@.length-1)]	-	last item only
+	[0,2] or [:2]	-	first two items
+	[?(@.attribute)]	-	filter items based on attribute
+	[?(@.price<10)]	-	filter items based on attribute value
+	[?(@.severity == 'WARN'), ?(@.severity == 'Error')]
+	//*	-	all elements
+		
+	
+	XPath	JSONPath	Result
+	/store/book/author	$.store.book[*].author	the authors of all books in the store
+	//author	$..author	all authors
+	/store/*	$.store.*	all things in store, which are some books and a red bicycle.
+	/store//price	$.store..price	the price of everything in the store.
+	//book[3]	$..book[2]	the third book
+	//book[last()]	$..book[(@.length-1)]
+	$..book[-1:]	the last book in order.
+	//book[position()<3]	$..book[0,1]
+	$..book[:2]	the first two books
+	//book[isbn]	$..book[?(@.isbn)]	filter all books with isbn number
+	//book[price<10]	$..book[?(@.price<10)]	filter all books cheapier than 10
+	//*	$..*	all Elements in XML document. All members of JSON structure.
