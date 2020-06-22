@@ -202,3 +202,320 @@ Variables:
 	Global and Env variables:
 		pm.variables.get("variable");
 
+
+
+
+
+
+Postman:
+	Postman uses JS and Mocha framework to crate and run test
+	Also, chai libs are used for assertions
+	
+	Chai assertions
+	Have three types:
+		expect
+		should - calls function
+		assert - not chainable
+	
+	Some of expect examples:
+	Types:
+		expect(1).to.be.a('number');
+		expect('foo').to.be.a('string');
+		expect([1,2,3]).to.be.a('array');
+		expect({a: 1}).to.be.an('object');
+		expect(null).to.be.a('null');
+		
+	String:
+		expect('foobar').to.include('foo');
+		expect('foo').to.have.lengthOf(3);
+		expect('').to.be.empty;
+
+	Number:
+		expect(2).to.equal(2);
+		expect(2).to.not.equal(1);
+		expect(1).to.be.oneOf([1, 2, 3]);
+		expect(1.5).to.be.closeTo(1, 0.5);
+		expect(1.5).to.be.closeTo(2, 0.5);
+
+	Boolean:
+		expect(true).to.be.true;
+		
+	Arrays:
+		expect([1, 2]).to.have.ordered.members([1, 2]);
+		expect([1, 2, 3]).to.have.members([2, 1, 3]);
+		expect([1, 2, 3]).to.be.an('array').that.includes(2);
+		expect([1, 2]).to.be.an('array').that.does.not.include(3);
+		expect([{a: 1}]).to.deep.include({a: 1});
+		expect([1, 2, 3]).to.have.lengthOf(3);
+		expect([]).to.be.an('array').that.is.empty;
+		expect([]).to.be.empty;
+	
+	Custom error message:
+		expect(1).to.be.a('string', 'nooo why fail??');
+		expect(1, 'nooo why fail??').to.be.a('string');
+	
+	Others:
+		expect({a: 1}).to.not.have.property('b');
+		expect({a: 1}).to.deep.equal({a: 1});
+		expect({a: 1, b: 2}).to.not.have.any.keys('c', 'd');
+		
+	Execution order:
+		Prerequsite-scripts -> Request -> Response -> Test scripts
+		
+	Pre-request scripts:
+		Runs before your request is sent
+		Three levels - Collection, Folder, Request
+		
+	Test scripts:
+		Runs after response is received
+		Three levels - Collection, Folder, Request
+		
+	Sandbox:
+		It is javascript execution environment
+		Some of the available libs - chai, tv4, pm-coll, xml2js
+		And some nodejs modules - path, assert, util, url, stream
+		
+		pm:Object
+			request and response being sent
+			environment variables - set and get
+		pm.sendRequest:Function
+			sending HTTP/HTTPS requests asynchronously
+			const echoPostRequest = {
+			  url: 'https://postman-echo.com/post',
+			  method: 'POST',
+			  header: 'headername1:value1',
+			  body: {
+				mode: 'raw',
+				raw: JSON.stringify({ key: 'this is json' })
+			  }
+			};
+			pm.sendRequest(echoPostRequest, function (err, res) {
+			  console.log(err ? err : res.json());
+			});
+			pm.sendRequest('https://postman-echo.com/get', function (err, res) {
+			  if (err) { console.log(err); }
+			  pm.test('response should be okay to process', function () {
+				pm.expect(err).to.equal(null);
+				pm.expect(res).to.have.property('code', 200);
+				pm.expect(res).to.have.property('status', 'OK');
+			  });
+			});
+	
+		pm.variables
+		pm.environment
+		pm.collectionVariables
+		pm.globals
+			has, set, get
+		pm.request
+			pm.request.url
+			pm.request.headers
+			pm.request.method:String
+			pm.request.body:RequestBody
+			pm.request.headers.add(headerName:String):function
+			pm.request.headers.remove(headerName:String):function
+		pm.response
+			pm.response.code:Number
+			pm.response.status:String
+			pm.response.headers:HeaderList
+			pm.response.responseTime:Number
+			pm.response.responseSize:Number
+			pm.response.text():Function → String
+			pm.response.json():Function → Object
+		pm.cookies
+		pm.cookies.jar
+		pm.getData
+		pm.test
+		pm.expect
+		pm.response.to.have.*
+			pm.response.to.have.status(code:Number)
+			pm.response.to.have.status(reason:String)
+			pm.response.to.have.header(key:String)
+			pm.response.to.have.header(key:String, optionalValue:String)
+			pm.response.to.have.body()
+			pm.response.to.have.body(optionalValue:String)
+			pm.response.to.have.body(optionalValue:RegExp)
+			pm.response.to.have.jsonBody()
+			pm.response.to.have.jsonBody(optionalExpectEqual:Object)
+			pm.response.to.have.jsonBody(optionalExpectPath:String)
+			pm.response.to.have.jsonBody(optionalExpectPath:String, optionalValue:*)
+			pm.response.to.have.jsonSchema(schema:Object)
+		pm.response.to.be.*
+			pm.response.to.be.info - Checks 1XX status code
+			pm.response.to.be.success - Checks 2XX status code
+			pm.response.to.be.redirection - Checks 3XX status code
+			pm.response.to.be.clientError - Checks 4XX status code
+			pm.response.to.be.serverError - Checks 5XX
+			pm.response.to.be.error - Checks 4XX or 5XX
+			pm.response.to.be.ok - Status code must be 200
+			pm.response.to.be.accepted - Status code must be 202
+			pm.response.to.be.badRequest - Status code must be 400
+			pm.response.to.be.unauthorized - Status code must be 401
+			pm.response.to.be.forbidden - Status code 403
+			pm.response.to.be.notFound - Status code of response is checked to be 404
+			pm.response.to.be.rateLimited - Checks whether response status code is 429
+		Dynamic variables - starts with $
+			Numbers, String - city, add, urls, amount, img, color, IP-add, phone, date, emails, files, directories, price, grammer
+	
+	Jenkin integration:
+		Postman has JavaScript based tests, so npm needs to be installed and can be run newman test sandbox
+		Install jenkin, NodeJS, NPM and newman
+		Newman is written in NodeJS, so npm required to run pm collection
+			npm install -g newman
+			newman run jenkins_demo.postman_collection.json
+	
+	Parameterization with data files:
+		Running same test multiple time with different data
+		We can use csv or json files to pass data
+		Getting data for each iteration to use in test scripts
+			pm.iterationData.get("value")
+		Data file:
+			[{
+			  "path": "post",
+			  "value": "1"
+			}, {
+			  "path": "post",
+			  "value": "2"
+			}]
+		Request and body:
+		"url": "postman-echo.com/{{path}}"
+		"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "foo",
+							"value": "{{value}}",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+	Debugging:
+		Runner - click on request and see what is in request and response
+		Console - Select specific request from history and check request and response
+	
+	Branches and looping:
+		It is just to send another request over current one
+	
+	Trash:
+		Find and restore the deleted API collections
+	
+	Others:
+	Settings
+		General:
+			Trim keys and values in request body
+			Request Timeout in ms (0 for infinity)
+			Working Directory
+			Editor Font Size
+			Two-pane view
+			Max response size(50MB)
+		Themes
+		Shortcuts
+			ctrl + t - new tab
+			ctrl + w - close tab
+			ctrl + tab - switch tab
+			ctrl + 1 to 9 - switch tabs
+			ctrl + shift + t - reopen closed tab
+			
+			Request:
+			ctrl + l - url
+			ctrl + s - save
+			ctrl + enter - send
+			ctrl + alt + enter - send and download
+			
+			Sidebar:
+			ctrl + f - search / find
+			ctrl + / - comment in body
+			ctrl + d - duplicate
+			
+			Inteface:
+			ctrl + + - zoom in
+			ctrl + - - zoom out
+			ctrl + 0 - reset
+			ctrl + o - import
+			ctrl + , - settings
+			ctrl + / - shortcuts
+			
+		Data
+			Export and import all including variables
+		Add-ons
+			Download newman from npm
+		Certificates
+		Proxy
+		
+	Cookies - managing cookies
+	Code
+		Request can be converted for different rest client and languages
+		We can modify the tab spaces and new lines in settings
+	
+	Collection Runner:
+		Running group of requests
+		Can define order of execution
+		Selective execution
+		
+	Working and sharing with teams:
+		Will be useful when sharing collections with team and having more updates
+		Monitor and mock collections will not be available
+		
+		Create a team workspace
+		Add team members
+		Create a collection and requests
+		Create fork and make changes
+		Raise Pull Request
+		Add reviewers
+		Review and merge
+	
+	Versioning an API:
+		Create and manage multiple API versions
+		can link collections, mocks, monitors, and documentation
+		
+	Mock server / collections & snapshot testing:
+		Matching the complete response with the stored or previous one
+			Response should exactly match the saved snapshot
+				useful if your API response is static and doesn’t change often
+			Response should have a snapshot as its subset
+				if new properties get added to the response, it doesn’t affect your test
+			Response should match the JSON Schema generated from the saved snapshot
+				This strategy generates a basic schema from your save snapshot and check the validity
+		Creating snapshots and mock server:
+			send request and save response as example
+			create them as mock server
+		https://medium.com/better-practices/snapshot-testing-for-apis-using-postman-7f9f26295d6b
+	
+	Top level NEW:
+	Create New
+		request, collection, mock, monitor, environment, api and api docs
+	Templates
+		These templates will have set of sample requests for some app and feature of easy use
+		github
+		snapshot testing
+		graphql
+		visualizer
+		oauth
+		testing related templates - test api, UI, test scripts, large request
+	API Network
+		This will be mainly used for developer to link with someother API during their own app development
+	
+	Monitor collections:
+		stay up to date on the health and performance of your APIs
+		built-in monitoring service helps you consolidate an additional step in your API One of PM development lifecycle
+		Monitors can be scheduled
+	
+	Share and import collections:
+		Share to a workspace - sharing to another workspace
+		Embed - anyone can access by clicking 'Run in Postman' button (API documentation)
+		Get public link - anyone can access by using this link
+	
+	Adding comments and examples
+		Comments - will help to collabrate with team members
+		Examples - it's response copy to use it in mock server / snapshot
+	
+	Capture request and cookies:
+		Request and cookies can be captured automatically
+		It needs interceptor and interceptor bridge
+		Interceptor will capture request and cookies from browser
+		Interceptor bridge will enable communication to interceptor
+		Proxy to be enabled and port should be same in PM and browser
+	
+	Postman integration with github:
+		Save pm collections in github
+		it requires PAT and Webhooks settings
