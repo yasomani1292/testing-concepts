@@ -9,14 +9,76 @@ Advantage?
 	Mock servers
 	Collection runner for running test repeatedly
 	Support CI/CD by newman feature
+	
 Variables?
-	Environment variable - for all collection with {{}}
-	Global / Collection variable - for all request with {{}}
+	Variable types and scope:
+	Global variables - for all request with {{}}
+	Colection variables
+	Environment variables - for all collection with {{}}
+		choose diff environments
+	Data variables
+		Comes from external source - CSV , Excel
+	Local Variable
+		Available only when running coll or req
+		Written in scripts
 	Path variable - specific request :pathVarName
 	Query parameter - specific request with key and value
-GraphQL?
+	
+BDD test in postman:
+	Hooks - before, after, beforeEach, afterEach
+	expect(req.body).to.have.scheam(myJsonSchema);
+	
+GraphQL
+Reference:
+	https://ppaas/docs/standards/graphql_api_design_standards
+	https://www.paypal.com/graphql
+
+	What?
 	Query language for API
 	It is specification for fetching specific / limited values in respone
+	When you want to call mutiple services and fetch various data elements, then GraphQL is solution
+	Improving performance, client experience
+	GraphQL is a query language for your API, and a server-side runtime for executing queries by using a type system you define
+	GraphQL is organized in terms of types
+	No concept of resource URI
+	Supports - POST method, Single end-point, application/json, 200 OK
+	Success and failures will be described in response body only
+
+	Features:
+		Supports query and mutation
+		Query - query set of fields from type
+		Mutation - modiifying state of type
+	
+	Naming convention:
+		types - CamelCase
+		fileds - accountNumber
+		Entries / values of enumeration - alphanumeric with _
+		Arrays - accountNumbers
+		Collection - use errors instead of errorList
+		Names should not use like encrypted or decrypted
+		Names should be in american english - favor vs favour, authorized vs authorised
+		Generally accepted conventions for names SHOULD be preferred
+			id should be used for identifiers everywhere
+		RFC standard - creationDate, creationTime
+	
+	Types:
+		Scalar The most basic GraphQL type and it represents a primitive value.
+		Enum A variant of Scalar that has a finite set of values.
+		Object A complex type that defines a set of fields, where each field is of another type.
+		Interface An abstract type that defines a list of fields that a type must include to implement the interface.
+		Union An abstract type that could be one of the possible types from a list of GraphQL Object types.
+		List A wrapper type that describes a collection or list of another type.
+		Non-Null A wrapper type that describes a non-null field element.
+		Input Object A special Object type that is passed as an argument to a Query or Mutation.
+	
+	Ex:
+		type Account { -> object
+		  accountNumber: String -> field
+		  emails: [String] -> array
+		  addresses: [String]! -> List collection
+		}
+		
+	How to test?
 	Create personnel access token / bearer token
 		Gitub -> Settings -> Developer Settings -> Generate PAT
 	Add it to postman request
@@ -24,6 +86,10 @@ GraphQL?
 	Create new API and import github public schema
 		https://developer.github.com/v4/public_schema/
 	Add this schema in request
+	
+
+Idempotent:
+	An idempotent HTTP method is an HTTP method that can be called many times without different outcomes. It would not matter if the method is called only once, or ten times over. ... POST is NOT idempotent. GET, PUT, DELETE, HEAD, OPTIONS and TRACE are idempotent
 
 Postman Modules:
 Http methods - CRUD operations
