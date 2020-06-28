@@ -1,10 +1,14 @@
 JMeter:
+	100% pure Java application for load and performance testing
 	Load Testing - system behaviour under specific load
 	Stree testing / robustness - knowing the upper limit of the system
 	Bottle neck
 	Endurance / soak / stability testing
 	Volume testing - transaction size being processed or transffered
 	Spike testing - system behaviour with sudden heavy loads
+	
+	How to use:
+	Download and extract zip file and open .bat file
 	
 	Other perf tools:
 		JMeter
