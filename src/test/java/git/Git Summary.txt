@@ -35,6 +35,7 @@
 	git checkout newBranch
 	git checkout -b newBranch
 	git checkout --orphan=newBranch
+	git checkout --track origin/newsletter
 	git merge otherBranchName
 	git branch -d newBranch
 	git branch -D newBranch
