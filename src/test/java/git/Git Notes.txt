@@ -63,6 +63,7 @@ Branch:
 	git branch -d branchName -> delete merged local branch
 	git branch -D branchName -> delete unmerged local branch
 	git push origin -d branchName -> delete remote branch
+	git checkout --track origin/newsletter -> checkout remote branch which is not present in local repo
 
 Code push:
 	git diff file
@@ -335,4 +336,3 @@ https://dzone.com/articles/useful-git-commands
 git checkout -b rsanthanakrishna-develop develop
 git pull git@github.paypal.com:rsanthanakrishna/batch-comp-reportmgmt.git develop
 Revert is reverting some commits in the middle with one commit history
-
