@@ -275,3 +275,18 @@ JSON data structure:
 			{ "id": "2", "name": "stuName2" } 
 		]
 	}
+
+Javax.ws.rs:
+	JAX-RS is specification
+	popular JAX-RS implementations are - Jersey, RestEasy, Restlet, Apace CFX, RestAssured
+
+	@GET, @POST, @PUT, @DELETE - Represents http methods
+	@Produces - what type of output returns by the method
+	@Consumes - what type of input consumes by the method
+	@Path - specify the URL path
+	@PathParam - REST-style URL parameters to method arguments using @PathParam
+	@QueryParam - Request parameters in query string can be accessed
+	@FormParam - Form parameter can be accessed directly
+	@HeaderParam
+	@CookieParam
+	@Context
