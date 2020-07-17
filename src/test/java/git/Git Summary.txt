@@ -50,6 +50,7 @@
 	
 	git commit -m "short msg about commit"
 	git commit --amend
+	git commit --amend --no-edit
 	
 	git push origin branchName
 	git push -u origin branchName
@@ -65,3 +66,8 @@
 	git reset --hard commitID
 	
 	git clean -dfin
+
+	git rebase -i HEAD~2
+		pick commit1 This commit msg used
+		fixup commit2 xx
+		fixup commit3 yy

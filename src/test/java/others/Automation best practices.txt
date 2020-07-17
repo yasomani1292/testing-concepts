@@ -1,0 +1,73 @@
+Automation best practices?
+	Should be having more stability and the reliability
+	
+	Do not rely ONLY on UI test automation
+		able to catch up to 90% of existing bugs with unit and API testing
+		Low level tests are,
+			more stable
+			much faster 
+			early stage
+			saves huge amount of time, effort and cost
+			Ex: Unit tests are faster than API tests while API tests are much faster than UI tests
+		
+	Try using BDD framework
+		Team collabration inside and outside
+		Clear test documentation
+		Business team also can understand
+		
+	Always use test design patterns and principles
+		reusable solution for a common problem in software design
+		POM / Screenplay pattern
+		
+	NEVER use Thread.sleep() unless required
+		Use implicit, explicit and fluent waits
+		
+	Do not run ALL tests across ALL target browsers
+		running all tests against all target browsers is redundant
+		can be performed by a limited test suite, which has tests that interact with all the main workflows at least once
+		
+	Separate your tests from your test automation framework
+		Maintain all framework code under - src/main/java
+		And test code under - src/test/java
+		
+	Make your test automation framework portable
+		Should able to run in nother machines
+		Runnable in CI
+		Use maven and git
+		Use WebDriverManager for downloading drivers
+		Testing artifacts small file in framework and bigger files in cloud storage(Aamazon S3)
+		
+	Name your tests wisely
+		clear and provide a self-descriptive idea about which exact functionality is being tested
+		Use either camelcase or _
+		
+	Use soft assertions if you need to make a list of related checks on the same web page
+		Soft asserts used to perform more than one verification and give one summary of errors at end
+		
+	Take screenshots for failure investigation
+		For easy debugging
+		
+	Make tests simpler instead of adding comments
+		For more readability
+		Ex:
+		withTimeoutOf(10, TimeUnit.SECONDS).waitFor(MAIN_HEADING_LABEL);// waiting for main page to load
+		homePage.waitUntilPageLoaded();
+		
+	Follow the “green tests run” policy
+		If some of the issues already present in app and not fixed by developer anytime soon
+		And your test fails and you are not sure wheather you got any unexpected bugs
+		Separate the test cases
+		
+	Use data-driven instead of repeated tests
+		Instead of writting more duplicated tests, use data-driven concepts
+		
+	All tests should be independent
+		Dependencies will make hard to read and maintain
+		Parallel run will give trouble
+		
+	Setup detailed automation tests reporting
+		Verifying test results is repeated and daily task, so it should not take much time
+		Make cleare reporting with graph and html reports
+		Integrate with test management tools
+		Test results can be grouped by execution results, types, tags, functionality
+		mvn clean verify

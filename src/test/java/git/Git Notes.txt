@@ -1,6 +1,23 @@
 Git and github difference:
 	Git is a version control system that lets you manage and keep track of your source code history. GitHub is a cloud-based hosting service that lets you manage Git repositories
 
+GIT workflow:
+		Two primary branches - master and develop
+		Master will reflect the production-ready state of sw
+		Develop reflect the latest development for the next release
+		
+		Release branch will be prepared for next release
+		
+		Hot fix will be done on Master branch
+		Supporting branches for specific purpose
+		
+		Git flow and branches:
+			master branch
+			hotfixes branch
+			release branch
+			develop branch
+			feature branch
+			
 Different areas:
 	Working tree
 	Staging area
@@ -322,6 +339,32 @@ Scenarios:
 	git branch -m master --> rename / move current branch to master
 	git push -f origin master
 
+22. Rewriting commits:
+	Amend commits:
+		git commit --amend --no-edit
+	Rewording commit message:
+		git rebase -i HEAD~2
+		reword for your commit
+		Edit commit message
+	Deleting commits:
+		git rebase -i HEAD~2
+		drop for your commit
+	Squshing / merging commits:
+		pick commit1 This commit msg used
+		fixup commit2 xx
+		fixup commit3 yy
+	Spliting commits:
+		edit commit
+		git add files
+		git commit 'new commit1'
+		git add some_other_files
+		git commit 'new commit2'
+		git rebase --continue
+	
+	Reordering commits:
+		just change the order of commits in rebase edit window
+	
+	
 https://www.youtube.com/watch?v=HVsySz-h9r4&list=PL-osiE80TeTuRUfjRe54Eea17-YfnOOAx
 https://www.vogella.com/tutorials/Git/article.html#gitdefintion_remoterepositories
 https://dzone.com/articles/useful-git-commands

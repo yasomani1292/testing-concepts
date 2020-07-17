@@ -1,0 +1,129 @@
+	JS:
+		What is JS and usege?
+			It is scripting language that conforms ECMAScript
+			Used Netscape and later IE and all other browsers
+			Used for web application, mobile application and desktop application like postman
+			Desktop application developed mostly using html, css and JS
+	
+		Installation and environment:
+			Initially run by all browser
+			Now anywhere either in local or server can be run using Node.js
+			Node.js is an javascript execution environment
+		
+		Variables:
+			Number
+				var num = 10; or var num = 10.12;
+			String
+				var carName = "Volvo";
+			Boolean
+				true / false
+			Undefined
+				var rollNum;
+			Null
+			Symbol
+			Arrays
+			Object
+		
+		Object: uses named index
+			var person = null;
+			var person = {};
+			var person = {
+				name = 'Mani',
+				email = 'mani@gmail.com',
+				age = 20
+			};
+			person.name = 'Mani';
+			
+		Arrays: uses numbered index
+			var arr = new Array(1,2,3); // bad approach
+			var arr = [];
+			var arr = [1,2,3];
+			var arr = ['a', 10, function(){}, [1,2,3]];
+			arr.shift(); -> remove first value
+			arr.pop(); -> remove last value
+			arr.push('a'); -> add value at last
+			arr.unshift('a'); -> add value at first
+			arr.length
+			arr.concat(arr2, arr3); -> join two arrays
+			arr.toString();
+			arr.join('_'); -> 1_2_3
+			arr.slice(1,3); -> split the array with given range of values
+			arr.splice(fromIndx, numOFEleToBeRemoved, and elementsToBeAdded);
+				remove range of elements and return the removed elements
+				And it can add somenew elements
+				Negative indx allowed, that starts from end
+			arr.index(1); -> get the index of given value
+			arr.includes(1); -> -> return true if value is found
+			arr.find(); -> find and return the object from array of object
+				let item = arr.find(item => item.id == 1);
+			arr.filter(); -> find and return the arrays of objects from array of objects with filter condt
+				let items = arr.filter(item => item.id < 3);
+			arr.map(); -> Transform an array
+				let lengths = ["Bilbo", "Gandalf", "Nazgul"].map(item => item.length);
+			arr.sort(fn); -> sort with comparator
+				function compareNumeric(a, b) {
+				  if (a > b) return 1;
+				  if (a == b) return 0;
+				  if (a < b) return -1;
+				}
+				let arr = [ 1, 2, 15 ];
+				arr.sort(compareNumeric);
+				or
+				arr.sort(function(a, b) { return a - b; });
+				or
+				arr.sort( (a, b) => a - b );
+			arr.split(', '); -> returns array of values
+			arr.split(', ', 2); -> returns array of first 2 values
+			arr.split(''); -> return letters
+			arr.reduce();
+				let result = arr.reduce((sum, current) => sum + current, 0);
+			arr.forEach(); -> used to iterate over all values
+			arr.reverse(); -> reverse the items
+
+			delete fruits[0];
+			Array.isArray([]); -> return true
+			
+		Conditionals:
+			if
+			else if
+			else
+			
+		Function:
+			function printHello(){
+				console.log('Hello!');
+			}
+			var myFunc = function(){
+				console.log('Hello!');
+			}	
+			
+			Either use console / return for fuction with parameter
+			function add(a, b)
+			{
+				console.log(a+b);
+			}
+			function add(a, b)
+			{
+				return a+b;
+			}
+			var aPlusb = (a, b) => a+b;
+			pm.test('',func());
+			pm.test('verify status to be 200', () => pm.statusCode());
+			
+		Loops:
+			for - for(var i=0; i< 5; i++){}
+			for (let name of arr) {}
+			while - while(a > 0){
+				console.log(a);
+				a--;
+			}
+			forEach - [].forEach(
+				function(letter){
+					console.log(letter);
+				});
+		
+		Variable scope:
+			var will be local and global scope
+			let will be block scope
+			const aa = 20; -> can't be changed
+			`` -> template string backticks
+				var salutation = `My name is ${person.name}`

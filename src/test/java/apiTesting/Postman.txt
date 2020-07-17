@@ -585,3 +585,38 @@ Postman:
 	Postman integration with github:
 		Save pm collections in github
 		it requires PAT and Webhooks settings
+
+	Test iteration using pre-request script:
+		https://www.google.com/search?q={{key}}
+		
+		Pre-request:
+		var keys = pm.environment.get("keys");
+		if(!keys){
+			keys = ["mani", "chennai", "yaso"];
+		}
+		var key = keys.shift();
+		pm.environment.set("key", key);
+		pm.environment.set("keys", keys);
+		
+		Test:
+		var keys = pm.environment.get("keys");
+		if(keys && keys.length > 0){
+			postman.setNextRequest("Data-set");
+		} else {
+			postman.setNextRequest(null);
+		}
+	
+Reference:
+	More details and usage - https://docs.postman-echo.com/?version=latest#intro
+	No need to wait for the backend to be ready - https://designer.mocky.io/design
+	Postman cheatsheet - https://postman-quick-reference-guide.readthedocs.io/en/latest/cheatsheet.html
+	Postman vdespa docs - https://github.com/vdespa/postman-quick-reference-guide
+	Visualizers - https://learning.postman.com/docs/postman/sending-api-requests/visualizer/
+	tests - https://learning.postman.com/docs/postman/scripts/test-scripts/
+	Auth basics - https://blog.restcase.com/restful-api-authentication-basics/
+
+
+	GraphQL:
+	https://ppaas/docs/standards/graphql_api_design_standards
+	https://www.paypal.com/graphql
+	https://learning.postman.com/docs/sending-requests/supported-api-frameworks/graphql/

@@ -1,0 +1,740 @@
+Webservice / API Basics:
+	Webservice:
+		Services that implements REST
+		Collection of open protocols and standards used for exchanging data between applications or systems or client and server
+
+	Types of Web services:
+		SOAP
+			SOAP is an XML-based protocol for accessing web services over HTTP
+			Envelope is an root element
+			Two parts
+				headers
+				body
+			
+	RESTful (JAX-RS JAVA API for RESTful ws / javax.ws.rs package)
+		REST Architecture based Web Services
+		Heterogeneous launguages and environments
+		Communicate between applications that are built in different language / environments
+		Everything is a resource and each of them identified by URI / Global IDs
+		Light weight, highly scalable and maintainable
+		Very commonly used to create APIs for web-based applications
+	XML-RPC - tightly coupled and old implementation
+	JSON-RPC
+
+	REST:
+		Roy Fielding in 2000
+		Architecture / pattern
+		Stands for Representational state transfer
+		Is a web service
+		Client dosen't want to know anything about application in server
+		REST doesn't allow server to store any information that sent by client
+		Client and Server communicate each other via HTTP using
+			URI
+			CRUD
+			JSON
+			
+	REST Evolution:
+		RPC
+			Remote Procedure Call
+			Oldest or simplest type of API
+			Tightly coupled
+			XML-RPC
+				Data format will be in XML
+			JSON-RPC
+		SOAP
+			Simple Object Access Protocol
+			Official protocol defined by W3C
+			W3C - world wide web consortium
+			Secured, light weight and fast
+		RESTful
+	
+	Elements or component:
+		Resources - API class and methods
+			@Path("")
+		Request Verb - Request method / type
+			GET - read
+			POST - creat
+			PUT - update
+			DELETE - delete resource / move to inaccessible location
+			OPTIONS - get the supported operations on a resource
+		Request Headers
+			Additional information sent with request
+			Type of response required
+			Authorization details
+		Request Body
+			Additional data sent for POST type
+			This will add a resource to the server
+		Response Body
+			Main body of response
+		Response status code
+		
+	Project / API implementation:
+		Generally 3 classes will be for one service
+			User.java - POJO class where it represents a table / json / xml and map fields
+			UserDao.java - Data Access Object - methods to perform CRUD operations
+			UserServices.java	-	This is service class where requests will be directly handled
+				@GET
+				@Path("/users")
+				@Produces(MediaType.APPLICATION_XML)
+				@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+				@FormParam("name") String name
+				@PathParam
+				@QueryParam
+				@HeaderParam
+				@MatrixParam
+			
+	URL and URI:
+		URI is used to identyfy the resources whereas the URL is the complete one which includes URI, params, header in an encoded format
+	
+	Http Methods:
+	15 http methods in total and 7 are popular,
+		GET - retreive data from a server
+		POST - create or udpate a resource
+		PUT - create or update a resource (PUT request is idempotent - multiple request will not make any side-effects an returns same result)
+		PATCH - partial modifications to the resource (non-idempotent)
+		DELETE - delete the resource at the specified URL
+		HEAD - useful for checking what a GET request will return before actually making GET request (like before downloading large file). verifying that a resource is available (idempotent)
+		OPTIONS - other methods and operations the server supports
+		
+		Difference between GET and POST:
+			GET - when not passing any sensitive / confidential data, not large parameters, 
+			GET method passes request parameter in URL String while POST method passes request parameter in request body.
+			GET request can only pass limited amount of data while POST method can pass large amount of data to server.
+			GET request can be bookmarked and cached unlike POST requests.
+			GET is mostly used for view purpose (e.g. SQL SELECT) while POST is mainly use for update purpose (e.g. SQL INSERT or UPDATE).
+		
+	Parameters:
+		Order of the params - path, matrix, query
+		path variable
+		matrix param
+		query param
+		form param
+		header param
+	
+	Authentication:
+		No Auth
+		Bearer Token
+		Basic auth
+		Digest Auth
+		OAuth 1.0
+		OAuth 2.0
+		NTLM Authentication
+		Hawk Authentication
+		AWS Signature
+
+	Content types:
+		JSON - application/json application/javascript text/javascript
+		XML - application/xml text/xml application/xhtml+xml
+		HTML - application/html, application/text, text/html
+		TEXT - text/plain
+		
+		Body:
+		none - no content / body
+		form-data - multipart/form-data; boundary={boundary string}
+		x-www.form.urlencoded - application/x-www-form-urlencoded
+		JavaScript - application/javascript
+		BINARY - application/octet-stream
+		GraphQL - application/json
+		ANY - */*
+		
+	Status & Error codes:
+	There are five categories for the first digit:
+		1xx (Informational): Communicates transfer protocol-level information
+		2xx (Successful): The request is successfully received, understood, and accepted
+			200	- Success / ok
+			201 - Created -> New resource created
+			202 - Request accepted but in-progress
+			204 - No body content - when response is empty / method is not defined
+		3xx (Redirection): Further action needs to be taken to complete the request
+			301 Moved permanently - resource redesigned and response header should have the new URI details
+			304 Not modified - no body content and not modified since then - If-Modified-Since
+		4xx (Client Error): The request contains the wrong syntax or cannot be fulfilled
+			400 - Bad request -> Non-specific failure. When no other error code (4XX) is appropriate / Malformed parameter
+			401 - Unauthorized - No permission to do specific operation
+			403 Forbidden - no permission on the sepcific resource or when accept header not specified
+			404 - Resource Not Found -> When rest API can't map client URI to resource, but available in future
+			405 Method Not Allowed - http method not allowed
+			409 Conflict - duplicate record creation by POST method
+			
+		5xx (Server Error): The server fails to fulfill an apparently valid request
+			500 Internal Server Error - when server raises an exception
+			503 Service unavailable - feature not implemented or unregognized http method
+	
+	Http Headers:
+		Generl headers
+		Entity headers
+		Request and response headers
+		
+		Authentication - WWW-Authenticate, Authorization, Proxy-Authenticate, Proxy-Authorization
+		Caching - Age, Cache-Control, Expires
+		Conditionals - Last-Modified, ETag, If-Match, If-None-Match, If-Modified-Since, If-Unmodified-Since, 
+		Conenction Management - Connection, Keep-Alive
+		Content Negotiation - Accept-Encoding, Accept-Language
+		Downloads - Content-Disposition
+		Message body information - Content-Length, Content-Type, Content-Encoding, Content-Language, Content-Location
+		Proxies - X-Forwarded-Host, X-Forwarded-Proto
+		Redirects - Location
+		Request context - From, Host, Referer, Referrer-Policy, User-Agent
+		Range requests - Accept-Ranges, If-Range, Content-Range
+		Security - Strict-Transport-Security (HSTS), X-Frame-Options (XFO), X-XSS-Protection
+		Transfer encoding - Transfer-Encoding
+		Web Sockets - Sec-WebSocket-Accept
+		Cookies - Cookie, Set-cookie
+		Response context
+		Caching:
+			max-age - set expiry time
+			must-revalidate - validation should be enabled after expiry
+			cache-control - control of cache
+
+	Automation tools:
+		Katalon Studio (support data-driven)
+			Open source
+			Web and Desktop Application
+			Mobile app
+			API - SOAP and REST request
+			Reports - Monitoring, Analytics, Insights
+			Integration - Jira, CI/CD, DevOps
+		Postman
+			Chrome plugin
+			Support Rest
+			Support integration test - Swagger and RAML format
+			Has Run, Test, Documentation and Monitoring features
+			Support GraphQL request, schemas, variables and query
+		SoapUI
+			Support Rest and Soap request
+			Load test and security scans can be done
+			Data-driven - from files, database, excel
+			Support CI/CD
+		Rest-Assured
+			Open source
+			Support Rest
+			Integrated with serenity
+			So support UI + Rest
+			Support BDD - given, when, then
+		JMeter
+			Open source
+			Support load and API testing
+			Support CI/CD
+		APIGee
+			Cross-cloud API testing tool
+			Powered by Javascript
+
+==================================================================
+JS / JSON / JSONPath:
+	JS:
+		What is JS and usege?
+			It is scripting language that conforms ECMAScript
+			Used Netscape and later IE and all other browsers
+			Used for web application, mobile application and desktop application like postman
+			Desktop application developed mostly using html, css and JS
+	
+		Installation and environment:
+			Initially run by all browser
+			Now anywhere either in local or server can be run using Node.js
+			Node.js is an javascript execution environment
+		
+		Variables:
+			Number
+				var num = 10; or var num = 10.12;
+			String
+				var carName = "Volvo";
+			Boolean
+				true / false
+			Undefined
+				var rollNum;
+			Null
+			Symbol
+			Arrays
+			Object
+		
+		Object: uses named index
+			var person = null;
+			var person = {};
+			var person = {
+				name = 'Mani',
+				email = 'mani@gmail.com',
+				age = 20
+			};
+			person.name = 'Mani';
+			
+		Arrays: uses numbered index
+			var arr = new Array(1,2,3); // bad approach
+			var arr = [];
+			var arr = [1,2,3];
+			var arr = ['a', 10, function(){}, [1,2,3]];
+			arr.shift(); -> remove first value
+			arr.pop(); -> remove last value
+			arr.push('a'); -> add value at last
+			arr.unshift('a'); -> add value at first
+			arr.length
+			arr.concat(arr2, arr3); -> join two arrays
+			arr.toString();
+			arr.join('_'); -> 1_2_3
+			arr.slice(1,3); -> split the array with given range of values
+			arr.splice(fromIndx, numOFEleToBeRemoved, and elementsToBeAdded);
+				remove range of elements and return the removed elements
+				And it can add somenew elements
+				Negative indx allowed, that starts from end
+			arr.index(1); -> get the index of given value
+			arr.includes(1); -> -> return true if value is found
+			arr.find(); -> find and return the object from array of object
+				let item = arr.find(item => item.id == 1);
+			arr.filter(); -> find and return the arrays of objects from array of objects with filter condt
+				let items = arr.filter(item => item.id < 3);
+			arr.map(); -> Transform an array
+				let lengths = ["Bilbo", "Gandalf", "Nazgul"].map(item => item.length);
+			arr.sort(fn); -> sort with comparator
+				function compareNumeric(a, b) {
+				  if (a > b) return 1;
+				  if (a == b) return 0;
+				  if (a < b) return -1;
+				}
+				let arr = [ 1, 2, 15 ];
+				arr.sort(compareNumeric);
+				or
+				arr.sort(function(a, b) { return a - b; });
+				or
+				arr.sort( (a, b) => a - b );
+			arr.split(', '); -> returns array of values
+			arr.split(', ', 2); -> returns array of first 2 values
+			arr.split(''); -> return letters
+			arr.reduce();
+				let result = arr.reduce((sum, current) => sum + current, 0);
+			arr.forEach(); -> used to iterate over all values
+			arr.reverse(); -> reverse the items
+
+			delete fruits[0];
+			Array.isArray([]); -> return true
+			
+		Conditionals:
+			if
+			else if
+			else
+			
+		Function:
+			function printHello(){
+				console.log('Hello!');
+			}
+			var myFunc = function(){
+				console.log('Hello!');
+			}	
+			
+			Either use console / return for fuction with parameter
+			function add(a, b)
+			{
+				console.log(a+b);
+			}
+			function add(a, b)
+			{
+				return a+b;
+			}
+			var aPlusb = (a, b) => a+b;
+			pm.test('',func());
+			pm.test('verify status to be 200', () => pm.statusCode());
+			
+		Loops:
+			for - for(var i=0; i< 5; i++){}
+			for (let name of arr) {}
+			while - while(a > 0){
+				console.log(a);
+				a--;
+			}
+			forEach - [].forEach(
+				function(letter){
+					console.log(letter);
+				});
+		
+		Variable scope:
+			var will be local and global scope
+			let will be block scope
+			const aa = 20; -> can't be changed
+			`` -> template string backticks
+				var salutation = `My name is ${person.name}`
+				
+		
+	JSON data structure:
+		JSON - JavaScript object notation
+		Language independent
+		Store and exchange data
+		Object to JSON - JSON.stringify(myObj);
+		JSON to object - JSON.parse(myJSON);
+		
+		Datatypes:
+			String - { "name":"John" }
+			Number - { "age":30 }
+			Boolean - { "sale":true }
+			Null - { "middlename":null }
+			Object:
+				{
+				"employee":{ "name":"John", "age":30, "city":"New York" }
+				}
+			Array:
+				{
+				"employees":[ "John", "Anna", "Peter" ]
+				}
+
+		List<Students> to JSON:
+			{
+			"Students": [
+				{ "id": "1", "name": "stuName1" },
+				{ "id": "2", "name": "stuName2" } 
+			]
+		}
+	
+	JSONPath: https://jsonpath.com/
+		JSON Operators:
+			$	-	root element
+			@	-	current element
+			[ ]	-	subscript operator
+			*	-	wildcard that returns all
+			,	-	union operator
+			:	-	array slice operator
+			()	-	script expression
+			?()	-	filter expression that matches certain criteria
+			.	-	child element
+			..	-	child and grand-child / descendent
+			[start:end]	-	range of items
+			[start:]	-	all items from start index
+			[:end]		-	all items from 1st to end index
+			[-end:]		-	items from last
+
+		Filter Operators:
+			==
+			=~
+			in
+			<
+			>
+			<=
+			>=
+			in	-	left exists in right [?(@.size in ['S', 'M'])]
+			nin	-	left does not exists in right
+			subsetof	-	left is a subset of right [?(@.sizes subsetof ['S', 'M', 'L'])]
+			size	-	size of left (array or string) should match right
+			empty	-	left (array or string) should be empty
+
+		Functions:
+			min()	-	
+			max()	-	
+			avg()	-	
+			stddev()	-	
+			length()	-	
+
+			parent element
+			not
+
+			
+			[*]	-	all items in the array
+			[0]	-	first item only
+			[-1:] or [(@.length-1)]	-	last item only
+			[0,2] or [:2]	-	first two items
+			[?(@.attribute)]	-	filter items based on attribute
+			[?(@.price<10)]	-	filter items based on attribute value
+			[?(@.severity == 'WARN'), ?(@.severity == 'Error')]
+			//*	-	all elements
+				
+			
+			XPath	JSONPath	Result
+			/store/book/author	$.store.book[*].author	the authors of all books in the store
+			//author	$..author	all authors
+			/store/*	$.store.*	all things in store, which are some books and a red bicycle.
+			/store//price	$.store..price	the price of everything in the store.
+			//book[3]	$..book[2]	the third book
+			//book[last()]	$..book[(@.length-1)]
+			$..book[-1:]	the last book in order.
+			//book[position()<3]	$..book[0,1]
+			$..book[:2]	the first two books
+			//book[isbn]	$..book[?(@.isbn)]	filter all books with isbn number
+			//book[price<10]	$..book[?(@.price<10)]	filter all books cheapier than 10
+			//*	$..*	all Elements in XML document. All members of JSON structure.
+	
+==================================================================
+Postman:
+	Features:
+		Supports REST, SOAP, GraphQL
+		Collection runners
+		CI/ CD integration
+		Collabration
+		Parameterization
+		BDD test
+		
+	Workflow:
+		Execution order:
+			Prerequsite-scripts -> Request -> Response -> Test scripts
+			
+		Pre-request scripts:
+			Runs before your request is sent
+			Three levels - Collection, Folder, Request
+			
+		Test scripts:
+			Runs after response is received
+			Three levels - Collection, Folder, Request
+
+	Import, Export and Share collections:
+		Share to a workspace - sharing to another workspace
+		Embed - anyone can access by clicking 'Run in Postman' button (API documentation)
+		Get public link - anyone can access by using this link
+
+	Mock server / collections & snapshot testing:
+		Matching the complete response with the stored or previous one
+			Response should exactly match the saved snapshot
+				useful if your API response is static and doesn’t change often
+			Response should have a snapshot as its subset
+				if new properties get added to the response, it doesn’t affect your test
+			Response should match the JSON Schema generated from the saved snapshot
+				This strategy generates a basic schema from your save snapshot and check the validity
+		Creating snapshots and mock server:
+			send request and save response as example
+			create them as mock server
+		https://medium.com/better-practices/snapshot-testing-for-apis-using-postman-7f9f26295d6b
+
+	Monitor collections:
+		stay up to date on the health and performance of your APIs
+		built-in monitoring service helps you consolidate an additional step in your API One of PM development lifecycle
+		Monitors can be scheduled
+	
+	Recording scripts:
+		Request and cookies can be captured automatically
+		It needs interceptor and interceptor bridge
+		Interceptor will capture request and cookies from browser
+		Interceptor bridge will enable communication to interceptor
+		Proxy to be enabled and port should be same in PM and browser
+	
+	Code:
+		Request can be converted for different rest client and languages
+		We can modify the tab spaces and new lines in settings
+
+	Cookies:
+		Cookies can be added as header
+		Cookies can be added domain specific as well
+
+	Variables:
+		Global variables - for all request with {{}}
+		Colection variables
+		Environment variables - for all collection with {{}}
+			choose diff environments
+		Data variables
+			Comes from external source - CSV , Excel
+		Local Variable
+			Available only when running coll or req
+			Written in scripts
+		Path variable - specific request :pathVarName
+		Query parameter - specific request with key and value
+	
+	Parameterization:
+		Running same test multiple time with different data
+		We can use Pre-request script, csv and json files can be used
+		Getting data for each iteration in test scripts - pm.iterationData.get("value")
+
+	CI / CD Integration / Newman:
+		Postman has JavaScript based tests, so npm needs to be installed and can be run newman test sandbox
+		Install jenkin, NodeJS, NPM and newman
+		Newman is written in NodeJS, so npm required to run pm collection
+			npm install -g newman
+			newman run jenkins_demo.postman_collection.json
+	
+	Collabration:
+		Will be useful when sharing collections with team and having more updates
+		Monitor and mock collections will not be available
+			Create a team workspace
+			Add team members
+			Create a collection and requests
+			Create fork and make changes
+			Raise Pull Request
+			Add reviewers
+			Review and merge
+
+	Postman integration with github:
+		Save pm collections in github
+		it requires PAT and Webhooks settings
+		
+	Console and Debugging:
+		Console and history can be used for debugging
+		Collection runner also help for debugging
+		
+	GraphQL:
+		Features:
+			Supports query and mutation
+			Query - query set of fields from type
+			Mutation - modiifying state of type
+
+		Query language for API
+		It is specification for fetching specific / limited values in respone
+		When you want to call mutiple services and fetch various data elements, then GraphQL is solution
+		Improving performance, client experience
+		GraphQL is a query language for your API, and a server-side runtime for executing queries by using a type system you define
+		GraphQL is organized in terms of types
+		No concept of resource URI
+		Supports - POST method, Single end-point, application/json, 200 OK
+		Success and failures will be described in response body only
+
+	Authorization (11):
+		1. Inerit auth from parent - refer collection / parent folder
+		2. No Auth - no authentication is required
+		3. API Key - key-value pair and can be added as header / query param
+		4. Bearer Token / JSON Web Token / JWT  - token as header (Bearer <Your API key>)
+		5. Basic auth - username and password (Basic <Base64 encoded username and password>)
+		6. Digest auth - two times request will be sent
+			un and pwd
+			un+ pwd + Number + Realm val + 401 + [un + pwd]
+		7. Oauth 1.0
+			Access data from thrid party API without exposing user credentials
+			Referred as two-legged / three-legged auth
+			Request for access token -> Return initial / temp token -> user sends auth with temp token -> SP returns access token
+			Can be passed as header / url / body
+			Need to pass 4 input from user
+		8. Oauth 2.0
+			Access token alone enough
+			You can generate token from postman as well by giving client / secret ID, callback url, auth url and token url
+		9. Hawk authentication
+			partial cryptographic verification
+			ID, Key and algorithm
+		10. AWS signature
+			used for aws
+			custom HTTP scheme
+			keyed-HMAC - Hash Message Authentication Code
+		11. NTLM auth
+			Username and password to be given. Domain and hostname will be taken from current PC
+			Windows operating system
+			standalone systems
+			
+	Tests and Asserts:
+		To verify reponses
+			pm.test - test cases
+			pm.response - response object
+			pm.expect - chai assertions
+		
+		Test:
+			1. test description
+			2. function(){};
+			
+		pm.request
+			pm.request
+			pm.request.url
+			pm.request.headers
+			pm.request.method:String
+			pm.request.body:RequestBody
+			pm.request.headers.add(headerName:String):function
+			pm.request.headers.remove(headerName:String):function
+		
+		pm.response
+			pm.response.code:Number
+			pm.response.status:String
+			pm.response.headers:HeaderList
+			pm.response.responseTime:Number
+			pm.response.responseSize:Number
+			pm.response.text():Function → String
+			pm.response.json():Function → Object
+		
+		pm.response.to.have.*
+			pm.response.to.have.status(code:Number)
+			pm.response.to.have.status(reason:String)
+			pm.response.to.have.header(key:String)
+			pm.response.to.have.header(key:String, optionalValue:String)
+			pm.response.to.have.body()
+			pm.response.to.have.body(optionalValue:String)
+			pm.response.to.have.body(optionalValue:RegExp)
+			pm.response.to.have.jsonBody()
+			pm.response.to.have.jsonBody(optionalExpectEqual:Object)
+			pm.response.to.have.jsonBody(optionalExpectPath:String)
+			pm.response.to.have.jsonBody(optionalExpectPath:String, optionalValue:*)
+			pm.response.to.have.jsonSchema(schema:Object)
+		
+			pm.response.to.have.status(200);
+			pm.response.to.not.be.error;
+			pm.response.to.have.jsonBody("");
+			pm.response.to.have.body("body string to search");
+			pm.response.to.not.have.jsonBody("error");
+			pm.response.to.have.header("headerName");
+			pm.response.text();
+			pm.response.json();
+			pm.response.responseTime;
+			pm.response.code;
+			
+			pm.response.to.be.ok;
+			pm.response.to.be.withBody;
+			pm.response.to.be.json;
+			
+		pm.response.to.be.*
+			pm.response.to.be.info - Checks 1XX status code
+			pm.response.to.be.success - Checks 2XX status code
+			pm.response.to.be.redirection - Checks 3XX status code
+			pm.response.to.be.clientError - Checks 4XX status code
+			pm.response.to.be.serverError - Checks 5XX
+			pm.response.to.be.error - Checks 4XX or 5XX
+			pm.response.to.be.ok - Status code must be 200
+			pm.response.to.be.accepted - Status code must be 202
+			pm.response.to.be.badRequest - Status code must be 400
+			pm.response.to.be.unauthorized - Status code must be 401
+			pm.response.to.be.forbidden - Status code 403
+			pm.response.to.be.notFound - Status code of response is checked to be 404
+			pm.response.to.be.rateLimited - Checks whether response status code is 429
+		
+		Dynamic variables - starts with $
+			Numbers, String - city, add, urls, amount, img, color, IP-add, phone, date, emails, files, directories, price, grammer
+			
+		pm.expect.*
+			pm.expect("").to.include("search string");
+			pm.expect([1,2,3]).to.include(2);
+			pm.expect({a:1,b:2,c:3}).to.include([a:1,c:3]);
+			pm.expect([1,2,3]).to.be.an('array').that.includes(2);
+			pm.expect("").to.eql(100);
+			pm.expect(int).to.equal(10);
+			pm.expect("mani").to.be.a('string');
+			pm.expect({a:1}).to.be.an('object');
+			pm.expect(undefined).to.be.an('undefined');
+			pm.expect("").to.be.below(200);
+			pm.expect("").to.be.oneOf([201,202]);
+			pm.expect("").to.be.true;
+			pm.expect("").to.be.false;
+			pm.expect([]).to.be.empty;
+			pm.expect('').to.be.empty;
+			pm.expect([]).to.be.an('array').that.is.empty;
+			pm.expect("").to.have.string("partial str");
+			pm.expect({a:1, b:2}).to.have.all.keys('a','b');
+			pm.expect({a:1, b:2}).to.have.any.keys('a','b');
+			pm.expect({a:1, b:2}).to.not.have.any.keys('c','d');
+			pm.expect({a:1,b:2}).to.have.property('a');
+			pm.expect({a:1,b:2}).to.be.an('object').that.has.all.keys('a','b');
+			pm.expect('mani').to.have.lengthOf(3);
+			pm.expect([1,2,3]).to.have.lengthOf(3);
+			pm.expect([1,2,3]).to.have.numbers([2,1,3]);
+			
+			//validate response structure - tiny validator
+			var schema = {type: int, type: boolean};
+			var data = {10, true};
+			pm.expect(tv4.validate(data, schema)).to.be true;
+			
+			//xml to json
+			var jsonObject = xml2Json(responseBody);
+			
+			//send asynchronous request
+			pm.sendRequest("req url", function(err, response){
+			console.log(response.json());
+			});
+			
+		Variables:
+		Gloabal variables:
+			pm.globals.set("variable","value");
+			pm.globals.get("variable");
+			pm.globals.unset("variable");
+			
+		Collection Variables:
+			pm.collectionVariables.set(variable:string, value:string);
+			pm.collectionVariables.get(variable:string);
+			pm.collectionVariables.unset(variable:string);
+
+		Environment Variables:
+			Create:
+				pm.environment.set("variable","value");
+				var obj = {a: 'val1', b: 'val2'}
+				pm.environment.set("obj", JSON.stringify(obj));
+
+			Read:	
+				var value = pm.environment.get('variable');
+				var obj = JSON.parse(pm.environment.get("obj"));
+
+			Reset:
+				pm.environment.unset("variable");
+			
+		Global and Env variables:
+			pm.variables.get("variable");
