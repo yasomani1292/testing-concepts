@@ -1,0 +1,70 @@
+Graphql:
+	Multi line comments - """ """
+	Single line comment - " "
+	All classes will be .graphql format
+	Class type will be either type or scalar
+	Defining var type:
+		name: String
+		name: String = "Default Name"
+		name: CustomString => CustomString will be a graphql scalar type with minLength, maxLength, pattern
+		ClassName() => constructor
+		
+Graphql code:
+	CustomerProfile.graphql
+		type CustomerProfile implements Profile {
+		id: ID!
+		tenantId: ID!
+
+		addresses(includeInactive : Boolean = False): [PersonAddress]
+		}
+		
+	DateNoTime.graphql
+		{
+			scalar DateNoTime @validate(minLength: 10, maxLength:10, pattern: "regex")
+		}
+
+	PersonAddress.graphql
+		type PersonAddress {
+			address: PersonAddressPortable
+			primary: Boolean
+			dateAdded: DateNoTime
+			}
+			
+	PersonAddressPortable.graphql
+		type PersonAddressPortable {
+			addressLine1: String
+			}
+		
+Request:
+	POST: https://te-hcp-test-all.qa.xxx.com:24299/v1/compliance/customerprofile/graphql
+	query MyQuery{
+        customerProfile(customerProfileInput: {tenantId: "xxx", id: "1675866383348832162"}) {
+            id
+            tenantId
+            addresses(includeInactive: true) {
+              address {
+                addressLine1
+                addressLine2
+              }
+              dateAdded
+            }
+          }
+      }
+	  
+Response:  
+	{
+		"data": {
+			"customerProfile": {
+				"id": "1675866383348832162",
+				"tenantId": "XXX",
+				"addresses": [
+					{
+						"address": {
+							"addressLine1": "2278767 Calista Court #4B",
+							"addressLine2": ""
+						},
+						"dateAdded": "2008-09-06"
+					}
+				}
+			}
+		}
