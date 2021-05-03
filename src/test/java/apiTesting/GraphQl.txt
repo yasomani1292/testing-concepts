@@ -33,6 +33,14 @@ Graphql code:
 	PersonAddressPortable.graphql
 		type PersonAddressPortable {
 			addressLine1: String
+			
+	GraphQL understanding - https://graphql.org/learn/validation/
+		type, interface, scalar
+		@Include(if: $withFriends)
+		@Skip
+		@Validate
+		! - required field
+
 			}
 		
 Request:
