@@ -33,15 +33,14 @@ Graphql code:
 	PersonAddressPortable.graphql
 		type PersonAddressPortable {
 			addressLine1: String
-			
+			}
+
 	GraphQL understanding - https://graphql.org/learn/validation/
 		type, interface, scalar
 		@Include(if: $withFriends)
 		@Skip
 		@Validate
 		! - required field
-
-			}
 		
 Request:
 	POST: https://te-hcp-test-all.qa.xxx.com:24299/v1/compliance/customerprofile/graphql
